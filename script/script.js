@@ -21,7 +21,7 @@ var checkWordMatched = function(event) {
 
     // Check word partially matches what has been typed in so far.
     if (inputValue === activeWord.slice(0, inputValue.length)) {
-        console.log(inputValue + " ok");
+        // console.log(inputValue + " ok");
     } else {
         console.log(inputValue + " typo!");
         this.value = inputValue.slice(0, inputValue.length - 1);
@@ -78,10 +78,12 @@ var beginGame = function () {
     }
 }
 
+
 var updateScore = function () {
     scoreText.textContent = score;
     livesText.textContent = playerLives;
 }
+
 
 mainInputBox.addEventListener('keyup', checkWordMatched);
 beginGameButton.addEventListener('click',beginGame);
