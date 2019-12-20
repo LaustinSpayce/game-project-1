@@ -1,3 +1,7 @@
 #mainInput {
     width: 100%;
 }
+
+.battle-background {
+    background-image: url(../img/backgrounds/backgroundColorDesert.png);
+}

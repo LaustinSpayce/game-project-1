@@ -79,6 +79,15 @@ var chooseNewWords = function () {
 }
 
 
+var clearWords = function () {
+    activeWord = "";
+    correctlyTypedPortion = "";
+    remainingToTypePortion = "";
+    wronglyTypedPortion = "";
+    updateWordDisplay();
+}
+
+
 var wrongLetterTyped = function() {
     if (!mistakeMade){
         playerLives--;
