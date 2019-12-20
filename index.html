@@ -23,7 +23,9 @@
         </div>   
         <div class="row" >
             <div class="col">
-                <p class="text-center text-monospace" id="wordDisplay">WordToMatch</p>
+                <p class="text-center text-monospace">
+                <span class="bg-success text-white" id="correctlyTypedPortion">CorrectText</span><span class="bg-danger text-white" id="wronglyTypedPortion"></span><span id="wordDisplay">WordToMatch</span>
+                </p>
             </div>
         </div>
        <div class="row" id="player-input">
@@ -32,8 +34,13 @@
             </div>  
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col text-center">
                 <button type="button" class="btn btn-primary" id="beginGame">Begin Game</button>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col text-center text-monospace">
+                <p id="completeWord">complete word to check.</p>
             </div>
         </div>
     </div>
