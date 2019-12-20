@@ -13,7 +13,13 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col"><h1>Game Project Title</h1></div>
+            <div class="col">
+                <h1>Type the word to win the game.</h1>
+            </div>
+            <div class="col">
+                <p>Score: <span id="scoreText">scoreText</span></p>
+                <p>Lives: <span id="livesText">livesText</span></p>
+            </div>
         </div>   
         <div class="row" >
             <div class="col">
@@ -24,6 +30,11 @@
             <div class="col">
                 <input id="mainInput" placeholder="input" class="text-center text-monospace">
             </div>  
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-primary" id="beginGame">Begin Game</button>
+            </div>
         </div>
     </div>
     <!-- Scripts -->
