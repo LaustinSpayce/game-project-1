@@ -13,6 +13,7 @@ var playerLives = 5;
 var gameOver = true;
 var score = 0;
 var mistakeMade = false
+var wordsPerBox = 3;
 
 var activeWord;
 var correctlyTypedPortion = "";
@@ -20,19 +21,18 @@ var wronglyTypedPortion = "";
 var remainingToTypePortion = "";
 
 
-
+// Checks the input box against the word/phrase.
 var checkWordMatched = function(event) {
     // console.log('no');
     var inputValue = this.value;
 
     // Check word partially matches what has been typed in so far.
     if (inputValue === activeWord.slice(0, inputValue.length)) {       
-        remainingToTypePortion = remainingToTypePortion.slice(1);
-        correctlyTypedDisplay.textContent = inputValue;
-        wordDisplay.textContent = remainingToTypePortion;
+        remainingToTypePortion = activeWord.slice(inputValue.length);
+        correctlyTypedPortion = inputValue;
         mistakeMade = false;
         wronglyTypedPortion = "";
-        wronglyTypedDisplay.textContent = wronglyTypedPortion;
+        updateWordDisplay();
     } else {
         // console.log(inputValue + " typo!");
         this.value = inputValue.slice(0, inputValue.length - 1);
@@ -50,22 +50,32 @@ var checkWordMatched = function(event) {
         this.value = "";
         score++;
         updateScore();
-        choosenewWord();
+        chooseNewWords();
     } else {
         // console.log(inputValue + " is not matched.");
     }
 };
 
 
-var choosenewWord = function () {
-    activeWord = "";
-    correctlyTypedDisplay.textContent = "";
-    mainInputBox.value = "";
-    var newWordIndex = Math.floor(Math.random() * wordDictionary.length);
-    activeWord = wordDictionary[newWordIndex];
-    remainingToTypePortion = activeWord;
-    wordDisplay.textContent = activeWord;
+var updateWordDisplay = function() {
+    correctlyTypedDisplay.textContent = correctlyTypedPortion;
+    wordDisplay.textContent = remainingToTypePortion;
+    wronglyTypedDisplay.textContent = wronglyTypedPortion;
     completeWordHint.textContent = activeWord;
+}
+
+
+var chooseNewWords = function () {
+    activeWord = "";
+    mainInputBox.value = "";
+    for (let i = 0; i < wordsPerBox; i++) {
+        var newWordIndex = Math.floor(Math.random() * wordDictionary.length);
+        activeWord += wordDictionary[newWordIndex] + " ";
+    }
+    activeWord = activeWord.trim();
+    correctlyTypedPortion = "";
+    remainingToTypePortion = activeWord;
+    updateWordDisplay();
 }
 
 
@@ -74,10 +84,10 @@ var wrongLetterTyped = function() {
         playerLives--;
         mistakeMade = true;
         console.log("Lives left: " + playerLives);
+        wronglyTypedPortion = remainingToTypePortion[0];
+        remainingToTypePortion = remainingToTypePortion.slice(1);
     }
-    wronglyTypedPortion = remainingToTypePortion[0];
-    wordDisplay.textContent = remainingToTypePortion.slice(1);
-    wronglyTypedDisplay.textContent = wronglyTypedPortion;
+    updateWordDisplay();
     checkGameOver();
 }
 
@@ -101,7 +111,7 @@ var beginGame = function () {
         mainInputBox.removeAttribute('disabled');
         wronglyTypedPortion = "";
         wronglyTypedDisplay.textContent = wronglyTypedPortion;
-        choosenewWord();
+        chooseNewWords();
         updateScore();
         mainInputBox.focus();
     }
@@ -116,8 +126,7 @@ var updateScore = function () {
 
 
 mainInputBox.addEventListener('keyup', checkWordMatched);
-beginGameButton.addEventListener('click',beginGame);
-choosenewWord();
+beginGameButton.addEventListener('click',beginGame);    chooseNewWords();
 updateScore();
 
 mainInputBox.setAttribute('disabled', true);
