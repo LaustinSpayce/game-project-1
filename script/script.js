@@ -22,12 +22,11 @@ var remainingToTypePortion = "";
 
 
 // Checks the input box against the word/phrase.
-var checkWordMatched = function(event) {
-    // console.log('no');
+var checkWordMatched = function (event) {
     var inputValue = this.value;
 
     // Check word partially matches what has been typed in so far.
-    if (inputValue === activeWord.slice(0, inputValue.length)) {       
+    if (inputValue === activeWord.slice(0, inputValue.length)) {
         remainingToTypePortion = activeWord.slice(inputValue.length);
         correctlyTypedPortion = inputValue;
         mistakeMade = false;
@@ -42,22 +41,21 @@ var checkWordMatched = function(event) {
     if (!inputValue) {
         remainingToTypePortion = activeWord;
     }
-    
 
-    // if the input equals the full active word.
+
+    // if the input equals the full active phrase.
     if (inputValue === activeWord) {
         console.log("word matched!");
         this.value = "";
         score++;
         updateScore();
         chooseNewWords();
-    } else {
-        // console.log(inputValue + " is not matched.");
     }
 };
 
 
-var updateWordDisplay = function() {
+// One function updates the word display to the player.
+var updateWordDisplay = function () {
     correctlyTypedDisplay.textContent = correctlyTypedPortion;
     wordDisplay.textContent = remainingToTypePortion;
     wronglyTypedDisplay.textContent = wronglyTypedPortion;
@@ -65,6 +63,7 @@ var updateWordDisplay = function() {
 }
 
 
+// Choose new words according to the difficulty.
 var chooseNewWords = function () {
     activeWord = "";
     mainInputBox.value = "";
@@ -78,7 +77,7 @@ var chooseNewWords = function () {
     updateWordDisplay();
 }
 
-
+// Clear words typed and displayed.
 var clearWords = function () {
     activeWord = "";
     correctlyTypedPortion = "";
@@ -87,9 +86,9 @@ var clearWords = function () {
     updateWordDisplay();
 }
 
-
-var wrongLetterTyped = function() {
-    if (!mistakeMade){
+// If an incorrect letter is typed. Only applies a penalty for the first mistake, subequent consecutive mistakes don't incur an extra penalty.
+var wrongLetterTyped = function () {
+    if (!mistakeMade) {
         playerLives--;
         mistakeMade = true;
         console.log("Lives left: " + playerLives);
@@ -110,7 +109,7 @@ var checkGameOver = function () {
     }
 }
 
-
+// End the game if the player loses all lives.
 var beginGame = function () {
     console.log('clicked');
     if (gameOver) {
@@ -126,16 +125,19 @@ var beginGame = function () {
     }
 }
 
-
+// Update the scores.
 var updateScore = function () {
     scoreText.textContent = score;
     livesText.textContent = playerLives;
 }
 
 
-
+// Add event listeners to everything, has to be below the function declarations.
 mainInputBox.addEventListener('keyup', checkWordMatched);
-beginGameButton.addEventListener('click',beginGame);    chooseNewWords();
-updateScore();
+beginGameButton.addEventListener('click', beginGame);
 
+// chooseNewWords();
+// updateScore();
+
+// Disable the input box if the game is not running.
 mainInputBox.setAttribute('disabled', true);

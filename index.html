@@ -1,76 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Game Project</title>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- My CSS -->
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
+    <!-- The container contains everything. -->
     <div class="container battle-background">
         <h1>Type the word to win the game.</h1>
-        <hr/>
-        <div class="row justify-content-around">
-            <div class="col-4 bg-white border rounded-lg h-25">
-                <div class="row"> 
+        <hr />
+
+        <!-- Row displaying player and enemy pictures. -->
+        <div class="row justify-content-around align-items-center">
+
+            <!-- Player image -->
+            <div class="col-6 text-center h-25">
+                <img class="img" height=300px src="img/snorlax.png">
+            </div>
+
+            <!-- Enemy image -->
+            <div class="col-6 text-center h-25">
+                <img class="img" height=350px src="img/eevee.png">
+            </div>
+        </div>
+
+        <!-- Row displaying player and enemy stats. -->
+        <div class="row justify-content-around align-items-center">
+
+            <!-- Player Statistics -->
+            <div class="col-4 bg-white border rounded-lg h-25" id="playerStatBox">
+                <div class="row">
                     <div class="col">
-                        <h2 id="enemyName">EnemyName</h2>
+                        <h2 id="playerName">PlayerName</h2>
                     </div>
                     <div class="col text-right">
-                        <h2 id="enemyLevel">Level 1</h2>
+                        <h2 id="playerLevel">playerLevel</h2>
                     </div>
                 </div>
-                <!-- <hr /> -->
+                <hr>
+                <!-- The progress bar "width" needs tgo be the percentage of HP. Set directly in JS -->
                 <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0"aria-valuemax="100"></div>
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="50"
+                        aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <p class="text-right" id="enemyHP">20 / 20</p>
+                <p class="text-right" id="playerHP">playerHP / playerMaxHP</p>
             </div>
-                <div class="col-6 text-center">
-                        <img class="img-fluid" width="250px" src="img/eevee.png">
+
+            <!-- Enemy Statistics -->
+            <div class="col-4 bg-white border rounded-lg h-25" id="enemyStatBox">
+                <div class="row">
+                    <div class="col">
+                        <h2 id="enemyName">enemyName</h2>
+                    </div>
+                    <div class="col text-right">
+                        <h2 id="enemyLevel">enemyLevel</h2>
+                    </div>
                 </div>
-                 </div>
-            <!-- <div class="row" style="height: 100px">
-            </div> -->
-            <div class="row justify-content-around align-items-end">
-                <div class="col-6 text-center">
-                    <img class="img-fluid" width="250px" src="img/snorlax.png">
+                <hr>
+                <!-- The progress bar "width" needs tgo be the percentage of HP. Set directly in JS -->
+                <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="50"
+                        aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <div class="col-4 bg-white border rounded-lg h-25">
-                    <div class="row"> 
-                        <div class="col">
-                            <h2 id="playerName">PlayerName</h2>
-                        </div>
-                        <div class="col text-right">
-                            <h2 id="playerLevel">Level 1</h2>
-                        </div>
-                    </div>
-                    <!-- <hr /> -->
-                        <div class="progress">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0"aria-valuemax="100"></div>
-                    </div>
-                    <p class="text-right" id="playerHP">15 / 20</p>
-                    </div>
-            </div>   
+                <p class="text-right" id="enemyHP">enemyHP / enemyMaxHP</p>
+            </div>
+        </div>
+
         <hr />
-        
-        <div class="row" >
+
+        <!-- Player interactive area -->
+        <div class="row">
             <div class="col">
                 <p class="text-center text-monospace">
-                <span class="bg-success text-white" id="correctlyTypedPortion">CorrectText</span><span class="bg-danger text-white" id="wronglyTypedPortion"></span><span id="wordDisplay">WordToMatch</span>
+                    <span class="bg-success text-white" id="correctlyTypedPortion">correctlyTypedPortion</span><span
+                        class="bg-danger text-white" id="wronglyTypedPortion">wronglyTypedPortion</span><span
+                        id="wordDisplay">wordDisplay</span>
                 </p>
             </div>
         </div>
-       <div class="row" id="player-input">
+
+        <!-- Player's text input box -->
+        <div class="row" id="player-input">
             <div class="col">
                 <input id="mainInput" placeholder="input" class="text-center text-monospace">
-            </div>  
+            </div>
         </div>
-        <hr/>
+        <hr />
         <div class="row">
             <div class="col text-center">
                 <button type="button" class="btn btn-primary" id="beginGame">Begin Game</button>
@@ -79,18 +103,27 @@
         <hr />
         <div class="row text-center">
             <div class="col text-center text-monospace">
-                <p id="completeWord">complete word to check.</p>
+
+                <!-- Deliberately kept hidden. Unhide when testing/debugging but it has to remain here else it breaks the script. -->
+                <p id="completeWord" hidden>complete word to check.</p>
                 <p>Score: <span id="scoreText">scoreText</span></p>
                 <p>Lives: <span id="livesText">livesText</span></p>
             </div>
         </div>
     </div>
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- Bootstrap scripts etc. -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
     <!-- My Scripts -->
     <script src="/words/words.js"></script>
     <script src="/script/script.js"></script>
 </body>
+
 </html>
