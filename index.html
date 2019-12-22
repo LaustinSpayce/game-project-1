@@ -14,22 +14,22 @@
 </head>
 
 <body>
-    <!-- The container contains everything. -->
+    <!-- The container contains everything for the main interface. -->
     <div class="container battle-background">
-        <h1>Type the word to win the game.</h1>
+        <h1 class="display-4 text-center">Type the word to win the game.</h1>
         <hr />
 
         <!-- Row displaying player and enemy pictures. -->
-        <div class="row justify-content-around align-items-center">
+        <div class="row justify-content-around align-items-center" style="height: 300px;" >
 
             <!-- Player image -->
-            <div class="col-6 text-center h-25">
-                <img class="img" height=300px src="img/snorlax.png">
+            <div class="col-6 text-center">
+                <img class="img" height=200px src="img/Adventurer/Poses/adventurer_stand.png">
             </div>
 
             <!-- Enemy image -->
-            <div class="col-6 text-center h-25">
-                <img class="img" height=350px src="img/eevee.png">
+            <div class="col-6 text-center">
+                <img class="img" height=200px src="img/Soldier/Poses/soldier_stand.png">
             </div>
         </div>
 
@@ -50,9 +50,9 @@
                 <!-- The progress bar "width" needs tgo be the percentage of HP. Set directly in JS -->
                 <div class="progress">
                     <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="50"
-                        aria-valuemin="0" aria-valuemax="100"></div>
+                        aria-valuemin="0" aria-valuemax="100" id="playerHealthBar"></div>
                 </div>
-                <p class="text-right" id="playerHP">playerHP / playerMaxHP</p>
+                <p class="text-right" id="playerHPDisplay"><span id="playerHP">playerHP</span> / <span id="playerMaxHP">playerMaxHP</span></p>
             </div>
 
             <!-- Enemy Statistics -->
@@ -69,9 +69,9 @@
                 <!-- The progress bar "width" needs tgo be the percentage of HP. Set directly in JS -->
                 <div class="progress">
                     <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="50"
-                        aria-valuemin="0" aria-valuemax="100"></div>
+                        aria-valuemin="0" aria-valuemax="100" id="enemyHealthBar"></div>
                 </div>
-                <p class="text-right" id="enemyHP">enemyHP / enemyMaxHP</p>
+                <p class="text-right" id="enemyHPDisplay"><span id="enemyHP">enemyHP</span> / <span id="enemyMaxHP">enemyMaxHP</span></p>
             </div>
         </div>
 
@@ -80,7 +80,7 @@
         <!-- Player interactive area -->
         <div class="row">
             <div class="col">
-                <p class="text-center text-monospace">
+                <p class="text-center text-monospace h3">
                     <span class="bg-success text-white" id="correctlyTypedPortion">correctlyTypedPortion</span><span
                         class="bg-danger text-white" id="wronglyTypedPortion">wronglyTypedPortion</span><span
                         id="wordDisplay">wordDisplay</span>
@@ -91,7 +91,7 @@
         <!-- Player's text input box -->
         <div class="row" id="player-input">
             <div class="col">
-                <input id="mainInput" placeholder="input" class="text-center text-monospace">
+                <input id="mainInput" placeholder="input" class="text-center text-monospace h3">
             </div>
         </div>
         <hr />

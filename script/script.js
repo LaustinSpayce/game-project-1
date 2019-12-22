@@ -1,5 +1,7 @@
 console.log("Script Loaded!")
 
+
+// Assign UI and stuff.
 var mainInputBox = document.querySelector('#mainInput');
 var wordDisplay = document.querySelector('#wordDisplay');
 var correctlyTypedDisplay = document.querySelector('#correctlyTypedPortion');
@@ -9,16 +11,42 @@ var beginGameButton = document.querySelector('#beginGame');
 var scoreText = document.querySelector('#scoreText');
 var livesText = document.querySelector('#livesText');
 
-var playerLives = 5;
+// Player UI Elements
+var playerNameText = document.querySelector('#playerName');
+var playerLevelText = document.querySelector('#playerLevel');
+var playerHealthBar = document.querySelector('#playerHealthBar');
+var playerHPText = document.querySelector('#playerHP');
+var playerMaxHPText = document.querySelector('#playerMaxHP');
+
+// Enemy UI Elements
+var enemyNameText = document.querySelector('#enemyName');
+var enemyLevelText = document.querySelector('#enemyLevel');
+var enemyHealthBar = document.querySelector('#enemyHealthBar');
+var enemyHPText = document.querySelector('#enemyHP');
+var enemyMaxHPText = document.querySelector('#enemyMaxHP');
+
+// Global variables
+var playerName = "Bob";
+var playerLevel = 1;
+var playerMaxHP = 5; 
+var playerHP = 5;
 var gameOver = true;
 var score = 0;
 var mistakeMade = false
 var wordsPerBox = 3;
 
+// Variables for the current word challenge to type.
 var activeWord;
 var correctlyTypedPortion = "";
 var wronglyTypedPortion = "";
 var remainingToTypePortion = "";
+
+// Enemy details
+var activeEnemyName = "Bad Guy";
+var activeEnemyLevel = 15;
+var enemyHP = 5;
+var enemyMaxHP = 5;
+var enemyDamage = 1;
 
 
 // Checks the input box against the word/phrase.
@@ -47,7 +75,7 @@ var checkWordMatched = function (event) {
     if (inputValue === activeWord) {
         console.log("word matched!");
         this.value = "";
-        score++;
+        score++; //TODO: "damage" the enemy.
         updateScore();
         chooseNewWords();
     }
@@ -74,6 +102,7 @@ var chooseNewWords = function () {
     activeWord = activeWord.trim();
     correctlyTypedPortion = "";
     remainingToTypePortion = activeWord;
+    updateHP();
     updateWordDisplay();
 }
 
@@ -86,14 +115,16 @@ var clearWords = function () {
     updateWordDisplay();
 }
 
-// If an incorrect letter is typed. Only applies a penalty for the first mistake, subequent consecutive mistakes don't incur an extra penalty.
+// If an incorrect letter is typed. Only applies a penalty for the first mistake.
+// Subequent consecutive mistakes don't incur an extra penalty.
 var wrongLetterTyped = function () {
     if (!mistakeMade) {
-        playerLives--;
+        playerHP -= enemyDamage; // TODO: Have some small randomisation
         mistakeMade = true;
-        console.log("Lives left: " + playerLives);
+        console.log("HP left " + playerHP + " / " + playerMaxHP);
         wronglyTypedPortion = remainingToTypePortion[0];
         remainingToTypePortion = remainingToTypePortion.slice(1);
+        updateHP();
     }
     updateWordDisplay();
     checkGameOver();
@@ -102,7 +133,7 @@ var wrongLetterTyped = function () {
 
 var checkGameOver = function () {
     updateScore();
-    if (playerLives <= 0) {
+    if (playerHP <= 0) {
         console.log('game over')
         gameOver = true;
         mainInputBox.setAttribute('disabled', true);
@@ -114,7 +145,7 @@ var beginGame = function () {
     console.log('clicked');
     if (gameOver) {
         score = 0;
-        playerLives = 5;
+        playerHP = 5;
         console.log('game begin');
         mainInputBox.removeAttribute('disabled');
         wronglyTypedPortion = "";
@@ -128,9 +159,15 @@ var beginGame = function () {
 // Update the scores.
 var updateScore = function () {
     scoreText.textContent = score;
-    livesText.textContent = playerLives;
+    livesText.textContent = playerHP;
 }
 
+var updateHP = function () {
+    playerHPText.textContent = playerHP;
+    playerMaxHPText.textContent = playerMaxHP;
+    var healthPercentage = Math.floor((playerHP / playerMaxHP) * 100);
+    playerHealthBar.style.width = healthPercentage + "%"
+}
 
 // Add event listeners to everything, has to be below the function declarations.
 mainInputBox.addEventListener('keyup', checkWordMatched);
@@ -138,6 +175,13 @@ beginGameButton.addEventListener('click', beginGame);
 
 // chooseNewWords();
 // updateScore();
+
+// Assign names and levels to player:
+playerNameText.textContent = playerName;
+playerLevelText.textContent = "Level " + playerLevel;
+enemyNameText.textContent = activeEnemyName;
+enemyLevelText.textContent = "Level " + activeEnemyLevel;
+
 
 // Disable the input box if the game is not running.
 mainInputBox.setAttribute('disabled', true);

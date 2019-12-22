@@ -4,4 +4,7 @@
 
 .battle-background {
 	background-image: url(../img/backgrounds/backgroundColorDesert.png);
+	background-color: rgb(242,225, 194);
+	background-position: 0px -370px;
+	background-repeat: repeat-x;
 }
