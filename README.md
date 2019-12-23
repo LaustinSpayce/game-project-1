@@ -12,7 +12,7 @@ Make a mistake to lose a life.
 
 If you make consecutive mistakes without a correct character being typed in, you won't lose more than 1 life.
 
-## Features to implement:
+## Features to implement
 * Simple player "classes" (difficulty):
     * Point 'n' Click Adventurer (easy 1 short word)
     * Keyboard Warrior (medium 2 medium words)
@@ -32,7 +32,7 @@ If you make consecutive mistakes without a correct character being typed in, you
     * Desert Level
     * Dark Dungeon
 
-## Game Assets:
+## Game Assets
 * www.kenney.nl
 * bevouliin.com
 * pipoya - https://itch.io/profile/pipoya
