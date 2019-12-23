@@ -8,8 +8,11 @@ var correctlyTypedDisplay = document.querySelector('#correctlyTypedPortion');
 var wronglyTypedDisplay = document.querySelector('#wronglyTypedPortion');
 var completeWordHint = document.querySelector('#completeWord');
 var beginGameButton = document.querySelector('#beginGame');
+var newEnemyButton = document.querySelector('#summonNewEnemy');
 var scoreText = document.querySelector('#scoreText');
 var livesText = document.querySelector('#livesText');
+var playerImage = document.querySelector('#playerImage');
+var enemyImage = document.querySelector('#enemyImage');
 
 // Player UI Elements
 var playerNameText = document.querySelector('#playerName');
@@ -34,6 +37,12 @@ var gameOver = true;
 var score = 0;
 var mistakeMade = false
 var wordsPerBox = 1;
+var enemiesDefeated = 0;
+var enemiesToReachBossBattle = 3;
+
+// Game levels 1-3, 1 - Grass, 2 - Desert, 3 - Dungeon.
+var activeGameStage = 1;
+var activeMonsterArray = level1MonsterArray;
 
 // Variables for the current word challenge to type.
 var activeWord;
@@ -79,10 +88,12 @@ var checkWordMatched = function (event) {
         updateEnemyHP();   
         updateScore();
         if (enemyHP === 0) {
-            console.log('Enemy slain!');
-            alert('You have defeated ' + activeEnemyName);
-            gameOver = true;
-            mainInputBox.setAttribute('disabled', true);
+            console.log(activeEnemyName + ' slain!');
+            // alert('You have defeated ' + activeEnemyName);
+            // gameOver = true;
+            // mainInputBox.setAttribute('disabled', true);
+            enemiesDefeated++;
+            selectNextEnemy();
         }
         chooseNewWords();
     }
@@ -164,6 +175,8 @@ var beginGame = function () {
         mainInputBox.removeAttribute('disabled');
         wronglyTypedPortion = "";
         wronglyTypedDisplay.textContent = wronglyTypedPortion;
+        randomiseArrayOrder(level1MonsterArray);
+        selectNextEnemy();
         chooseNewWords();
         updateScore();
         mainInputBox.focus();
@@ -194,6 +207,22 @@ var updateEnemyHP = function () {
 var updateEnemyDetails = function () {
     enemyNameText.textContent = activeEnemyName;
     enemyLevelText.textContent = "Level " + activeEnemyLevel; 
+}
+
+
+var setActiveEnemy = function (enemyInput) {
+    activeEnemyName = enemyInput.name;
+    activeEnemyLevel = enemyInput.level;
+    enemyMaxHP = enemyInput.startHP;
+    enemyHP = enemyInput.startHP;
+    var enemyGraphic = enemyInput.graphic;
+    enemyImage.src = enemyGraphic;
+    updateEnemyDetails();
+    updateEnemyHP();
+}
+
+var selectNextEnemy = function() {    
+    setActiveEnemy(activeMonsterArray[enemiesDefeated]);
 }
 
 // Add event listeners to everything, has to be below the function declarations.

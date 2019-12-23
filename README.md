@@ -27,7 +27,12 @@ If you make consecutive mistakes without a correct character being typed in, you
     * Unfunny meme
     * Pepe the frog
     * Inconsistent bugs
+* Levels to go through:
+    * Grassy Field
+    * Desert Level
+    * Dark Dungeon
 
 ## Game Assets:
 www.kenney.nl
 bevouliin.com
+pipoya - https://itch.io/profile/pipoya
