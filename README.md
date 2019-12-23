@@ -33,6 +33,6 @@ If you make consecutive mistakes without a correct character being typed in, you
     * Dark Dungeon
 
 ## Game Assets:
-www.kenney.nl
-bevouliin.com
-pipoya - https://itch.io/profile/pipoya
+* www.kenney.nl
+* bevouliin.com
+* pipoya - https://itch.io/profile/pipoya
