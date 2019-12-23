@@ -33,7 +33,7 @@ var playerHP = 5;
 var gameOver = true;
 var score = 0;
 var mistakeMade = false
-var wordsPerBox = 3;
+var wordsPerBox = 1;
 
 // Variables for the current word challenge to type.
 var activeWord;
@@ -42,8 +42,8 @@ var wronglyTypedPortion = "";
 var remainingToTypePortion = "";
 
 // Enemy details
-var activeEnemyName = "Bad Guy";
-var activeEnemyLevel = 15;
+var activeEnemyName = "Terry";
+var activeEnemyLevel = 5;
 var enemyHP = 5;
 var enemyMaxHP = 5;
 var enemyDamage = 1;
@@ -75,8 +75,15 @@ var checkWordMatched = function (event) {
     if (inputValue === activeWord) {
         console.log("word matched!");
         this.value = "";
-        score++; //TODO: "damage" the enemy.
+        enemyHP--; //TODO: "damage" the enemy.
+        updateEnemyHP();   
         updateScore();
+        if (enemyHP === 0) {
+            console.log('Enemy slain!');
+            alert('You have defeated ' + activeEnemyName);
+            gameOver = true;
+            mainInputBox.setAttribute('disabled', true);
+        }
         chooseNewWords();
     }
 };
@@ -104,6 +111,8 @@ var chooseNewWords = function () {
     remainingToTypePortion = activeWord;
     updateHP();
     updateWordDisplay();
+    updateEnemyHP();
+    updateEnemyDetails();
 }
 
 // Clear words typed and displayed.
@@ -119,6 +128,10 @@ var clearWords = function () {
 // Subequent consecutive mistakes don't incur an extra penalty.
 var wrongLetterTyped = function () {
     if (!mistakeMade) {
+        // TODO: Freeze the game input
+        // Have the enemy swipe the player.
+        // Then deduct the HP.
+        console.log('Enemy attack animation.');
         playerHP -= enemyDamage; // TODO: Have some small randomisation
         mistakeMade = true;
         console.log("HP left " + playerHP + " / " + playerMaxHP);
@@ -146,6 +159,7 @@ var beginGame = function () {
     if (gameOver) {
         score = 0;
         playerHP = 5;
+        enemyHP = enemyMaxHP;
         console.log('game begin');
         mainInputBox.removeAttribute('disabled');
         wronglyTypedPortion = "";
@@ -166,7 +180,20 @@ var updateHP = function () {
     playerHPText.textContent = playerHP;
     playerMaxHPText.textContent = playerMaxHP;
     var healthPercentage = Math.floor((playerHP / playerMaxHP) * 100);
-    playerHealthBar.style.width = healthPercentage + "%"
+    playerHealthBar.style.width = healthPercentage + "%";
+}
+
+
+var updateEnemyHP = function () {
+    enemyHPText.textContent = enemyHP;
+    enemyMaxHPText.textContent = enemyMaxHP;
+    var healthPercentage = Math.floor((enemyHP / enemyMaxHP) * 100);
+    enemyHealthBar.style.width = healthPercentage + "%";
+}
+
+var updateEnemyDetails = function () {
+    enemyNameText.textContent = activeEnemyName;
+    enemyLevelText.textContent = "Level " + activeEnemyLevel; 
 }
 
 // Add event listeners to everything, has to be below the function declarations.

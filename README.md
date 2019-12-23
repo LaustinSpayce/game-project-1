@@ -27,3 +27,7 @@ If you make consecutive mistakes without a correct character being typed in, you
     * Unfunny meme
     * Pepe the frog
     * Inconsistent bugs
+
+## Game Assets:
+www.kenney.nl
+bevouliin.com
