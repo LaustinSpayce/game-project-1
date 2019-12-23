@@ -8,3 +8,9 @@
 	background-position: 0px -370px;
 	background-repeat: repeat-x;
 }
+
+/* Annoyingly Mozilla/Firefox supports crisp-edges but not pixelated.
+And google chrome supports pixelated but not crisp-edges. */
+.pixelated {
+	image-rendering: pixelated crisp-edges;
+}
