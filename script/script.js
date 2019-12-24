@@ -41,8 +41,8 @@ var enemiesDefeated = 0;
 var enemiesToReachBossBattle = 3;
 
 // Game levels 1-3, 1 - Grass, 2 - Desert, 3 - Dungeon.
-var activeGameStage = 1;
-var activeMonsterArray = level1MonsterArray;
+var activeGameStage = greenFieldsLevel;
+var activeMonsterArray = greenFieldsLevel.monsterArray;
 
 // Variables for the current word challenge to type.
 var activeWord;
@@ -56,6 +56,7 @@ var activeEnemyLevel = 5;
 var enemyHP = 5;
 var enemyMaxHP = 5;
 var enemyDamage = 1;
+var bossFight = false;
 
 
 // Checks the input box against the word/phrase.
@@ -175,7 +176,7 @@ var beginGame = function () {
         mainInputBox.removeAttribute('disabled');
         wronglyTypedPortion = "";
         wronglyTypedDisplay.textContent = wronglyTypedPortion;
-        randomiseArrayOrder(level1MonsterArray);
+        randomiseArrayOrder(activeMonsterArray);
         selectNextEnemy();
         chooseNewWords();
         updateScore();
@@ -222,7 +223,16 @@ var setActiveEnemy = function (enemyInput) {
 }
 
 var selectNextEnemy = function () {
-    setActiveEnemy(activeMonsterArray[enemiesDefeated]);
+    if (bossFight) {
+        alert('Move to next stage');
+        return;
+    }
+    if (enemiesDefeated >= activeGameStage.enemiesBeforeBoss) {
+        bossFight = true;
+        setActiveEnemy(activeGameStage.stageBoss);
+    } else {
+        setActiveEnemy(activeMonsterArray[enemiesDefeated]);
+    }
 }
 
 // Add event listeners to everything, has to be below the function declarations.
