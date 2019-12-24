@@ -31,7 +31,7 @@ var enemyMaxHPText = document.querySelector('#enemyMaxHP');
 // Global variables
 var playerName = "Bob";
 var playerLevel = 1;
-var playerMaxHP = 5; 
+var playerMaxHP = 5;
 var playerHP = 5;
 var gameOver = true;
 var score = 0;
@@ -85,7 +85,7 @@ var checkWordMatched = function (event) {
         console.log("word matched!");
         this.value = "";
         enemyHP--; //TODO: "damage" the enemy.
-        updateEnemyHP();   
+        updateEnemyHP();
         updateScore();
         if (enemyHP === 0) {
             console.log(activeEnemyName + ' slain!');
@@ -206,7 +206,7 @@ var updateEnemyHP = function () {
 
 var updateEnemyDetails = function () {
     enemyNameText.textContent = activeEnemyName;
-    enemyLevelText.textContent = "Level " + activeEnemyLevel; 
+    enemyLevelText.textContent = "Level " + activeEnemyLevel;
 }
 
 
@@ -221,7 +221,7 @@ var setActiveEnemy = function (enemyInput) {
     updateEnemyHP();
 }
 
-var selectNextEnemy = function() {    
+var selectNextEnemy = function () {
     setActiveEnemy(activeMonsterArray[enemiesDefeated]);
 }
 

@@ -2,9 +2,16 @@
 	width: 100%;
 }
 
-.battle-background {
+.battle-background-desert {
 	background-image: url(../img/backgrounds/backgroundColorDesert.png);
-	background-color: rgb(242,225, 194);
+	background-color: rgb(242, 225, 194);
+	background-position: 0px -370px;
+	background-repeat: repeat-x;
+}
+
+.battle-background-forest {
+	background-image: url(../img/backgrounds/backgroundColorGrass.png);
+	background-color: rgb(0, 188, 122);
 	background-position: 0px -370px;
 	background-repeat: repeat-x;
 }
