@@ -203,7 +203,7 @@ var beginGame = function () {
         return;
     }
     if (gameOver) {
-        playerName = playerNameInput.value.trim().slice(0,16);
+        playerName = playerNameInput.value.trim().slice(0, 16);
         playerNameText.textContent = playerName;
         playerDamageText.textContent = "";
         enemyDamageText.textContent = "";
@@ -328,7 +328,7 @@ var heroSelection = function () {
 
 
 var checkIfCanStartGame = function () {
-    playerName = playerNameInput.value.slice(0,16);
+    playerName = playerNameInput.value.slice(0, 16);
     if (playerName.trim().length > 0 && wordsPerBox > 0) {
         beginGameButton.removeAttribute('disabled');
     } else {
@@ -338,12 +338,12 @@ var checkIfCanStartGame = function () {
 
 
 var toggleContainerVisibility = function (pageElement) {
-        if (pageElement.classList.contains('d-none')) {
-                pageElement.classList.remove('d-none');
-            } else {
-                pageElement.classList.add('d-none');
-            }
-        }
+    if (pageElement.classList.contains('d-none')) {
+        pageElement.classList.remove('d-none');
+    } else {
+        pageElement.classList.add('d-none');
+    }
+}
 
 
 
