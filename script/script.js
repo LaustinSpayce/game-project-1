@@ -328,11 +328,13 @@ var heroSelection = function () {
 
 
 var checkIfCanStartGame = function () {
-    playerName = playerNameInput.value.slice(0, 16);
-    if (playerName.trim().length > 0 && wordsPerBox > 0) {
+    playerName = playerNameInput.value.trim().slice(0, 16);
+    if (playerName.length > 0 && wordsPerBox > 0) {
         beginGameButton.removeAttribute('disabled');
+        return true;
     } else {
         beginGameButton.setAttribute('disabled', true);
+        return false;
     }
 }
 
@@ -345,6 +347,11 @@ var toggleContainerVisibility = function (pageElement) {
     }
 }
 
+var hitEnterToBeginGame = function () {
+    if (checkIfCanStartGame()) {
+        beginGame();
+    }
+}
 
 
 // Add event listeners to everything, has to be below the function declarations.
@@ -354,6 +361,7 @@ chooseAdventurer.addEventListener('click', heroSelection);
 chooseWarrior.addEventListener('click', heroSelection);
 chooseWizard.addEventListener('click', heroSelection);
 playerNameInput.addEventListener('keyup', checkIfCanStartGame);
+playerNameInput.addEventListener('change', hitEnterToBeginGame);
 
 
 // Assign names and levels to player:
