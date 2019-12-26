@@ -24,19 +24,19 @@ var level2MonsterArray = [];
 var level3MonsterArray = [];
 
 // Monsters for level 1 (green fields);
-var grassLandBat = new EnemyMonster('Bad Bat', 2, 1, "img/enemy/pipo-enemy001.png", 1, 5);
+var grassLandBat = new EnemyMonster('Bad Bat', 15, 1, "img/enemy/pipo-enemy001.png", 1, 5);
 level1MonsterArray.push(grassLandBat);
-var angryChicken = new EnemyMonster('Angry chicken', 3, 2, 'img/enemy/pipo-enemy036.png', 1, 5);
+var angryChicken = new EnemyMonster('Angry chicken', 20, 2, 'img/enemy/pipo-enemy036.png', 1, 5);
 level1MonsterArray.push(angryChicken);
-var babyChick = new EnemyMonster('Baby Chick', 2, 1, 'img/enemy/pipo-enemy035.png', 1, 5);
+var babyChick = new EnemyMonster('Baby Chick', 15, 1, 'img/enemy/pipo-enemy035.png', 1, 5);
 level1MonsterArray.push(babyChick);
-var littleMouse = new EnemyMonster('Harmless Mouse', 4, 2, 'img/enemy/pipo-enemy034.png', 1, 5);
+var littleMouse = new EnemyMonster('Harmless Mouse', 20, 2, 'img/enemy/pipo-enemy034.png', 1, 5);
 level1MonsterArray.push(littleMouse);
-var sheep = new EnemyMonster('Sheep', 3, 2, 'img/enemy/pipo-enemy031.png', 1, 5);
+var sheep = new EnemyMonster('Sheep', 12, 2, 'img/enemy/pipo-enemy031.png', 1, 5);
 level1MonsterArray.push(sheep);
-var knightEnemy = new EnemyMonster('Silent Knight', 5, 3, 'img/enemy/pipo-enemy018.png', 1, 5);
+var knightEnemy = new EnemyMonster('Silent Knight', 18, 3, 'img/enemy/pipo-enemy018.png', 1, 5);
 level1MonsterArray.push(knightEnemy);
-var greenLandBoss = new EnemyMonster('Boss', 10, 10, 'img/enemy/pipo-boss001.png', 1, 20, true);
+var greenLandBoss = new EnemyMonster('Boss', 30, 10, 'img/enemy/pipo-boss001.png', 1, 20, true);
 
 
 // Monsters for level 2 (Desert):

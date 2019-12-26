@@ -13,6 +13,8 @@ var scoreText = document.querySelector('#scoreText');
 var livesText = document.querySelector('#livesText');
 var playerImage = document.querySelector('#playerImage');
 var enemyImage = document.querySelector('#enemyImage');
+var enemyDamageText = document.querySelector('#enemyDamageText');
+var playerDamageText = document.querySelector('#playerDamageText');
 
 // Player UI Elements
 var playerNameText = document.querySelector('#playerName');
@@ -39,6 +41,8 @@ var mistakeMade = false
 var wordsPerBox = 1;
 var enemiesDefeated = 0;
 var enemiesToReachBossBattle = 3;
+var playerBaseDamage = 5;
+var playerDamageMultiplier = 2;
 
 // Game levels 1-3, 1 - Grass, 2 - Desert, 3 - Dungeon.
 var activeGameStage = greenFieldsLevel;
@@ -85,11 +89,10 @@ var checkWordMatched = function (event) {
     if (inputValue === activeWord) {
         console.log("word matched!");
         this.value = "";
-        enemyHP--; //TODO: "damage" the enemy.
-        updateEnemyHP();
+        damageEnemy();
         updateScore();
-        if (enemyHP === 0) {
-            console.log(activeEnemyName + ' slain!');
+        if (enemyHP <= 0) {
+            // console.log(activeEnemyName + ' slain!');
             // alert('You have defeated ' + activeEnemyName);
             // gameOver = true;
             // mainInputBox.setAttribute('disabled', true);
@@ -145,6 +148,7 @@ var wrongLetterTyped = function () {
         // Then deduct the HP.
         console.log('Enemy attack animation.');
         playerHP -= enemyDamage; // TODO: Have some small randomisation
+        damageTextAppear(enemyDamage, playerDamageText);
         mistakeMade = true;
         console.log("HP left " + playerHP + " / " + playerMaxHP);
         wronglyTypedPortion = remainingToTypePortion[0];
@@ -169,6 +173,8 @@ var checkGameOver = function () {
 var beginGame = function () {
     console.log('clicked');
     if (gameOver) {
+        playerDamageText.textContent = "";
+        enemyDamageText.textContent = "";
         score = 0;
         playerHP = 5;
         enemyHP = enemyMaxHP;
@@ -234,6 +240,24 @@ var selectNextEnemy = function () {
         setActiveEnemy(activeMonsterArray[enemiesDefeated]);
     }
 }
+
+var damageEnemy = function () {
+    // 5 points base damage + 1 point per level + 1-5 random points.
+    var damageDealt = playerBaseDamage + (playerLevel * playerDamageMultiplier) + Math.floor(Math.random() * playerBaseDamage);
+    console.log(damageDealt + " damage! Oof Ow Socko!");
+    enemyHP -= damageDealt;
+    enemyHP = (enemyHP < 0) ? 0 : enemyHP; // if HP is less than 0 set it to 0.
+    damageTextAppear(damageDealt, enemyDamageText);
+    updateEnemyHP();
+}
+
+var damageTextAppear = function (damage, targetBox) {
+    targetBox.textContent = damage;
+    var damageTextBoxReset = setTimeout(function () {
+        targetBox.textContent = "";
+    }, 1000);
+}
+
 
 // Add event listeners to everything, has to be below the function declarations.
 mainInputBox.addEventListener('keyup', checkWordMatched);
