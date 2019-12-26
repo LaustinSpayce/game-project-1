@@ -14,6 +14,28 @@
 </head>
 
 <body>
+    <!-- Before you start the game, pick your character class and set your player name. -->
+    <div class="container" id="heroSelectScreen">
+        <div class="display-2 text-center">Choose your hero</div>
+        <hr />
+        <div class="display-4 choose-your-hero p-3" id="chooseAdventurer">Point 'n' Click Adventurer</div>
+        <div class="display-4 text-right choose-your-hero p-3" id="chooseWarrior">Keyboard Warrior</div>
+        <div class="display-4 choose-your-hero p-3" id="chooseWizard">Netcodemancer</div>
+        <hr />
+        <div class="row text-center">
+            <div class="col p-3">
+                <h1>Player Name</h1>
+                <input id="playerNameInput" placeholder="Player Name" class="text-center text-monospace h3">
+            </div>
+            <div class="col p-3">
+                <button type="button" class="btn btn-primary" id="beginGame">Begin Game</button>
+            </div>
+        </div>
+
+
+    </div>
+
+
     <!-- The container contains everything for the main interface. -->
     <div class="container battle-background-forest">
         <h1 class="display-4 text-center">Type the word to win the game.</h1>
@@ -32,7 +54,7 @@
             <div class="col-6 text-center">
                 <img class="img" height=240px src="img/enemy/furr_walking_monster/idle/skeleton-idle_0.png"
                     id="enemyImage">
-                    <div class="damage-text h1 text-danger" id="enemyDamageText">XXX</div>
+                <div class="damage-text h1 text-danger" id="enemyDamageText">XXX</div>
             </div>
         </div>
 
@@ -45,8 +67,8 @@
                     <div class="col">
                         <h2 id="playerName">PlayerName</h2>
                     </div>
-                    <div class="col text-right">
-                        <h2 id="playerLevel">playerLevel</h2>
+                    <div class="col-auto text-right">
+                        <h5 id="playerLevel">playerLevel</h5>
                     </div>
                 </div>
                 <hr>
@@ -65,8 +87,8 @@
                     <div class="col">
                         <h2 id="enemyName">enemyName</h2>
                     </div>
-                    <div class="col text-right">
-                        <h2 id="enemyLevel">enemyLevel</h2>
+                    <div class="col-auto text-right">
+                        <h5 id="enemyLevel">enemyLevel</h5>
                     </div>
                 </div>
                 <hr>
@@ -102,8 +124,7 @@
         <hr />
         <div class="row">
             <div class="col text-center">
-                <button type="button" class="btn btn-primary" id="beginGame">Begin Game</button>
-                <button type="button" class="btn btn-danger" id="summonNewEnemy">Summon New Enemy</button>
+                <button type="button" class="btn btn-danger" id="summonNewEnemy" hidden>Summon New Enemy</button>
             </div>
         </div>
         <hr />

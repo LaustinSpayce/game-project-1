@@ -24,10 +24,40 @@ And google chrome supports pixelated but not crisp-edges. */
 
 .damage-text {
 	position: absolute;
-    bottom: 25%;
-	left: 35%;
+    top: 0;
+    line-height: 4;
+    width: 100%;
+    height: 100%;
 	text-shadow: black 2px 2px;
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
 	font-size: 4em;
+}
+
+.choose-your-hero {
+	background-repeat: no-repeat;
+	height: 200px;
+	background-size: contain;
+}
+
+.choose-your-hero:hover {
+	background-color: grey;
+}
+
+#chooseAdventurer {
+	background-image: url(../img/playerCharacter/Elf-idle-00.png);
+	background-position: right;
+}
+
+#chooseWarrior {
+	background-image: url(../img/playerCharacter/knight-idle-00.png);
+}
+
+#chooseWizard {
+	background-image: url(../img/playerCharacter/witch-idle-00.png);
+	background-position: right;
+}
+
+.selected {
+	background-color: goldenrod;
 }

@@ -15,6 +15,11 @@ var playerImage = document.querySelector('#playerImage');
 var enemyImage = document.querySelector('#enemyImage');
 var enemyDamageText = document.querySelector('#enemyDamageText');
 var playerDamageText = document.querySelector('#playerDamageText');
+var heroSelection = document.querySelector('#heroSelection');
+var chooseAdventurer = document.querySelector('#chooseAdventurer');
+var chooseWarrior = document.querySelector('#chooseWarrior');
+var chooseWizard = document.querySelector('#chooseWizard');
+var heroSelectScreen = document.querySelector('#heroSelectScreen');
 
 // Player UI Elements
 var playerNameText = document.querySelector('#playerName');
@@ -130,6 +135,7 @@ var chooseNewWords = function () {
     updateEnemyDetails();
 }
 
+
 // Clear words typed and displayed.
 var clearWords = function () {
     activeWord = "";
@@ -138,6 +144,7 @@ var clearWords = function () {
     wronglyTypedPortion = "";
     updateWordDisplay();
 }
+
 
 // If an incorrect letter is typed. Only applies a penalty for the first mistake.
 // Subequent consecutive mistakes don't incur an extra penalty.
@@ -169,6 +176,7 @@ var checkGameOver = function () {
     }
 }
 
+
 // End the game if the player loses all lives.
 var beginGame = function () {
     console.log('clicked');
@@ -190,11 +198,13 @@ var beginGame = function () {
     }
 }
 
+
 // Update the scores.
 var updateScore = function () {
     scoreText.textContent = score;
     livesText.textContent = playerHP;
 }
+
 
 var updateHP = function () {
     playerHPText.textContent = playerHP;
@@ -228,6 +238,7 @@ var setActiveEnemy = function (enemyInput) {
     updateEnemyHP();
 }
 
+
 var selectNextEnemy = function () {
     if (bossFight) {
         alert('Move to next stage');
@@ -241,6 +252,7 @@ var selectNextEnemy = function () {
     }
 }
 
+
 var damageEnemy = function () {
     // 5 points base damage + 1 point per level + 1-5 random points.
     var damageDealt = playerBaseDamage + (playerLevel * playerDamageMultiplier) + Math.floor(Math.random() * playerBaseDamage);
@@ -251,6 +263,7 @@ var damageEnemy = function () {
     updateEnemyHP();
 }
 
+
 var damageTextAppear = function (damage, targetBox) {
     targetBox.textContent = damage;
     var damageTextBoxReset = setTimeout(function () {
@@ -259,12 +272,15 @@ var damageTextAppear = function (damage, targetBox) {
 }
 
 
+var heroSelection = function () {
+
+}
+
+
 // Add event listeners to everything, has to be below the function declarations.
 mainInputBox.addEventListener('keyup', checkWordMatched);
 beginGameButton.addEventListener('click', beginGame);
 
-// chooseNewWords();
-// updateScore();
 
 // Assign names and levels to player:
 playerNameText.textContent = playerName;
