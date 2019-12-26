@@ -203,7 +203,7 @@ var beginGame = function () {
         return;
     }
     if (gameOver) {
-        playerName = playerNameInput.value;
+        playerName = playerNameInput.value.trim().slice(0,16);
         playerNameText.textContent = playerName;
         playerDamageText.textContent = "";
         enemyDamageText.textContent = "";
@@ -328,7 +328,8 @@ var heroSelection = function () {
 
 
 var checkIfCanStartGame = function () {
-    if (playerNameInput.value.trim().length > 0 && wordsPerBox > 0) {
+    playerName = playerNameInput.value.slice(0,16);
+    if (playerName.trim().length > 0 && wordsPerBox > 0) {
         beginGameButton.removeAttribute('disabled');
     } else {
         beginGameButton.setAttribute('disabled', true);
