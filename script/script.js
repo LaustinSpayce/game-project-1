@@ -1,28 +1,15 @@
 console.log("Script Loaded!")
 
-
-// Assign UI and stuff.
+// Gameplay UI
+var gameplayMainContainer = document.querySelector('#gameplayMainContainer');
 var mainInputBox = document.querySelector('#mainInput');
 var wordDisplay = document.querySelector('#wordDisplay');
 var correctlyTypedDisplay = document.querySelector('#correctlyTypedPortion');
 var wronglyTypedDisplay = document.querySelector('#wronglyTypedPortion');
 var completeWordHint = document.querySelector('#completeWord');
-var beginGameButton = document.querySelector('#beginGame');
 var newEnemyButton = document.querySelector('#summonNewEnemy');
 var scoreText = document.querySelector('#scoreText');
 var livesText = document.querySelector('#livesText');
-var playerImage = document.querySelector('#playerImage');
-var enemyImage = document.querySelector('#enemyImage');
-var enemyDamageText = document.querySelector('#enemyDamageText');
-var playerDamageText = document.querySelector('#playerDamageText');
-var heroSelection = document.querySelector('#heroSelection');
-var chooseAdventurer = document.querySelector('#chooseAdventurer');
-var chooseWarrior = document.querySelector('#chooseWarrior');
-var chooseWizard = document.querySelector('#chooseWizard');
-var chooseClassArray = document.querySelectorAll('.choose-your-hero');
-var heroSelectScreen = document.querySelector('#heroSelectScreen');
-var playerNameInput = document.querySelector('#playerNameInput');
-var gameplayMainContainer = document.querySelector('#gameplayMainContainer');
 
 // Player UI Elements
 var playerNameText = document.querySelector('#playerName');
@@ -30,6 +17,8 @@ var playerLevelText = document.querySelector('#playerLevel');
 var playerHealthBar = document.querySelector('#playerHealthBar');
 var playerHPText = document.querySelector('#playerHP');
 var playerMaxHPText = document.querySelector('#playerMaxHP');
+var playerDamageText = document.querySelector('#playerDamageText');
+var playerImage = document.querySelector('#playerImage');
 
 // Enemy UI Elements
 var enemyNameText = document.querySelector('#enemyName');
@@ -37,6 +26,18 @@ var enemyLevelText = document.querySelector('#enemyLevel');
 var enemyHealthBar = document.querySelector('#enemyHealthBar');
 var enemyHPText = document.querySelector('#enemyHP');
 var enemyMaxHPText = document.querySelector('#enemyMaxHP');
+var enemyDamageText = document.querySelector('#enemyDamageText');
+var enemyImage = document.querySelector('#enemyImage');
+
+// Options Menu / character selection
+var heroSelection = document.querySelector('#heroSelection');
+var chooseAdventurer = document.querySelector('#chooseAdventurer');
+var chooseWarrior = document.querySelector('#chooseWarrior');
+var chooseWizard = document.querySelector('#chooseWizard');
+var chooseClassArray = document.querySelectorAll('.choose-your-hero');
+var heroSelectScreen = document.querySelector('#heroSelectScreen');
+var playerNameInput = document.querySelector('#playerNameInput');
+var beginGameButton = document.querySelector('#beginGame');
 
 // Global variables
 var playerName = "playerName";
@@ -189,7 +190,6 @@ var checkGameOver = function () {
         toggleContainerVisibility(gameplayMainContainer);
     }
 }
-
 
 
 var beginGame = function () {
@@ -346,6 +346,7 @@ var toggleContainerVisibility = function (pageElement) {
         pageElement.classList.add('d-none');
     }
 }
+
 
 var hitEnterToBeginGame = function () {
     if (checkIfCanStartGame()) {
