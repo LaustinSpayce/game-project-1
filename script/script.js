@@ -337,7 +337,6 @@ var checkIfCanStartGame = function () {
 
 
 var toggleContainerVisibility = function (pageElement) {
-    debugger;
         if (pageElement.classList.contains('d-none')) {
                 pageElement.classList.remove('d-none');
             } else {
