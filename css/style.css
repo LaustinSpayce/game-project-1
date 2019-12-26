@@ -58,6 +58,6 @@ And google chrome supports pixelated but not crisp-edges. */
 	background-position: right;
 }
 
-.selected {
+.hero-selected {
 	background-color: goldenrod;
 }

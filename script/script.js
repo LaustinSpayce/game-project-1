@@ -19,7 +19,10 @@ var heroSelection = document.querySelector('#heroSelection');
 var chooseAdventurer = document.querySelector('#chooseAdventurer');
 var chooseWarrior = document.querySelector('#chooseWarrior');
 var chooseWizard = document.querySelector('#chooseWizard');
+var chooseClassArray = [chooseAdventurer, chooseWarrior, chooseWizard];
 var heroSelectScreen = document.querySelector('#heroSelectScreen');
+var playerNameInput = document.querySelector('#playerNameInput');
+var gameplayMainContainer = document.querySelector('#gameplayMainContainer');
 
 // Player UI Elements
 var playerNameText = document.querySelector('#playerName');
@@ -36,18 +39,22 @@ var enemyHPText = document.querySelector('#enemyHP');
 var enemyMaxHPText = document.querySelector('#enemyMaxHP');
 
 // Global variables
-var playerName = "Bob";
+var playerName = "playerName";
 var playerLevel = 1;
 var playerMaxHP = 5;
 var playerHP = 5;
 var gameOver = true;
 var score = 0;
 var mistakeMade = false
-var wordsPerBox = 1;
+var wordsPerBox = 0;
 var enemiesDefeated = 0;
 var enemiesToReachBossBattle = 3;
 var playerBaseDamage = 5;
 var playerDamageMultiplier = 2;
+var maxWordLength = 10;
+var adventurerImage = 'img/playerCharacter/Elf-idle-00.png';
+var warriorImage = 'img/playerCharacter/knight-idle-00.png';
+var wizardImage = 'img/playerCharacter/witch-idle-00.png';
 
 // Game levels 1-3, 1 - Grass, 2 - Desert, 3 - Dungeon.
 var activeGameStage = greenFieldsLevel;
@@ -124,6 +131,10 @@ var chooseNewWords = function () {
     mainInputBox.value = "";
     for (let i = 0; i < wordsPerBox; i++) {
         var newWordIndex = Math.floor(Math.random() * wordDictionary.length);
+        // If the word is too long for the difficulty, keep getting different words until it is short enough.
+        while (wordDictionary[newWordIndex].length > maxWordLength) {
+            var newWordIndex = Math.floor(Math.random() * wordDictionary.length);
+        }
         activeWord += wordDictionary[newWordIndex] + " ";
     }
     activeWord = activeWord.trim();
@@ -167,20 +178,33 @@ var wrongLetterTyped = function () {
 }
 
 
+// End the game if the player loses all lives.
 var checkGameOver = function () {
     updateScore();
     if (playerHP <= 0) {
         console.log('game over')
         gameOver = true;
         mainInputBox.setAttribute('disabled', true);
+        toggleContainerVisibility(heroSelectScreen);
+        toggleContainerVisibility(gameplayMainContainer);
     }
 }
 
 
-// End the game if the player loses all lives.
+
 var beginGame = function () {
     console.log('clicked');
+    if (playerNameInput.value.trim().length === 0) {
+        alert('please type in your character name');
+        return;
+    }
+    if (!wordsPerBox) {
+        alert('please pick your hero');
+        return;
+    }
     if (gameOver) {
+        playerName = playerNameInput.value;
+        playerNameText.textContent = playerName;
         playerDamageText.textContent = "";
         enemyDamageText.textContent = "";
         score = 0;
@@ -191,6 +215,8 @@ var beginGame = function () {
         wronglyTypedPortion = "";
         wronglyTypedDisplay.textContent = wronglyTypedPortion;
         randomiseArrayOrder(activeMonsterArray);
+        toggleContainerVisibility(heroSelectScreen);
+        toggleContainerVisibility(gameplayMainContainer);
         selectNextEnemy();
         chooseNewWords();
         updateScore();
@@ -273,13 +299,61 @@ var damageTextAppear = function (damage, targetBox) {
 
 
 var heroSelection = function () {
-
+    // console.log('Hero clicked ' + this.id);
+    for (let i = 0; i < chooseClassArray.length; i++) {
+        chooseClassArray[i].classList.remove('hero-selected');
+    }
+    this.classList.add('hero-selected');
+    switch (this.id) {
+        case 'chooseAdventurer':
+            wordsPerBox = 1;
+            maxWordLength = 5;
+            playerImage.src = adventurerImage;
+            break;
+        case 'chooseWarrior':
+            wordsPerBox = 2;
+            maxWordLength = 7;
+            playerImage.src = warriorImage;
+            break;
+        case 'chooseWizard':
+            wordsPerBox = 3;
+            maxWordLength = 10;
+            playerImage.src = wizardImage;
+            break;
+        default:
+            console.log('Something went wrong selecting the hero');
+    }
+    checkIfCanStartGame();
 }
+
+
+var checkIfCanStartGame = function () {
+    if (playerNameInput.value.trim().length > 0 && wordsPerBox > 0) {
+        beginGameButton.removeAttribute('disabled');
+    } else {
+        beginGameButton.setAttribute('disabled', true);
+    }
+}
+
+
+var toggleContainerVisibility = function (pageElement) {
+    debugger;
+        if (pageElement.classList.contains('d-none')) {
+                pageElement.classList.remove('d-none');
+            } else {
+                pageElement.classList.add('d-none');
+            }
+        }
+
 
 
 // Add event listeners to everything, has to be below the function declarations.
 mainInputBox.addEventListener('keyup', checkWordMatched);
 beginGameButton.addEventListener('click', beginGame);
+chooseAdventurer.addEventListener('click', heroSelection);
+chooseWarrior.addEventListener('click', heroSelection);
+chooseWizard.addEventListener('click', heroSelection);
+playerNameInput.addEventListener('keyup', checkIfCanStartGame);
 
 
 // Assign names and levels to player:
@@ -291,3 +365,4 @@ enemyLevelText.textContent = "Level " + activeEnemyLevel;
 
 // Disable the input box if the game is not running.
 mainInputBox.setAttribute('disabled', true);
+beginGameButton.setAttribute('disabled', true);
