@@ -209,22 +209,23 @@ var beginGame = function () {
         playerDamageText.textContent = "";
         enemyDamageText.textContent = "";
         score = 0;
-        playerHP = 5;
-        enemyHP = enemyMaxHP;
         console.log('game begin');
         mainInputBox.removeAttribute('disabled');
         wronglyTypedPortion = "";
-        wronglyTypedDisplay.textContent = wronglyTypedPortion;
-        randomiseArrayOrder(activeMonsterArray);
+        wronglyTypedDisplay.textContent = wronglyTypedPortion; 
         toggleContainerVisibility(heroSelectScreen);
         toggleContainerVisibility(gameplayMainContainer);
-        selectNextEnemy();
-        chooseNewWords();
-        updateScore();
-        mainInputBox.focus();
+        beginNewStage();
     }
 }
 
+
+var checkIfGameWon = function () {
+    if (!gameStagesArray[activeGameStageIndex]) {
+        alert('You win! Game over!');
+        return true;
+    }
+}
 
 // Update the scores.
 var updateScore = function () {
@@ -266,14 +267,28 @@ var setActiveEnemy = function (enemyInput) {
 }
 
 
+var beginNewStage = function () {
+    activeGameStage = gameStagesArray[activeGameStageIndex];
+    activeMonsterArray = activeGameStage.monsterArray;
+    gameplayMainContainer.classList.add(activeGameStage.backgroundImageClass);
+    randomiseArrayOrder(activeMonsterArray);
+    enemiesDefeated = 0;
+    playerHP = playerMaxHP;
+    selectNextEnemy();
+    chooseNewWords();
+    updateScore();
+    mainInputBox.focus();
+}
+
+
 var selectNextEnemy = function () {
     if (bossFight) {
         console.log('Onto the next stage');
         bossFight = false;
+        gameplayMainContainer.classList.remove(activeGameStage.backgroundImageClass);
         activeGameStageIndex++;
-        activeGameStage = gameStagesArray[activeGameStageIndex];
-        activeMonsterArray = activeGameStage.monsterArray;
-        enemiesDefeated = 0;
+        if (checkIfGameWon()) { return; }
+        beginNewStage();
         // TODO: Change background.
         return;
     }

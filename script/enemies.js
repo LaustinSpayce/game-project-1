@@ -79,8 +79,8 @@ function randomiseArrayOrder(array) {
 
 
 // Create the levels as objects.
-var greenFieldsLevel = new StageLevel("Green Fields", 'img/backgrounds/backgroundColorGrass.png', level1MonsterArray, greenLandBoss, 3);
-var dustyDesertLevel = new StageLevel("Dusty Desert", 'img/backgrounds/backgroundColorDesert.png', level2MonsterArray, desertLandBoss, 3);
+var greenFieldsLevel = new StageLevel("Green Fields", 'battle-background-forest', level1MonsterArray, greenLandBoss, 3);
+var dustyDesertLevel = new StageLevel("Dusty Desert", 'battle-background-desert', level2MonsterArray, desertLandBoss, 3);
 
 
 // Levels stored in one array.
