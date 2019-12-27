@@ -57,9 +57,10 @@ var adventurerImage = 'img/playerCharacter/Elf-idle-00.png';
 var warriorImage = 'img/playerCharacter/knight-idle-00.png';
 var wizardImage = 'img/playerCharacter/witch-idle-00.png';
 
-// Game levels 1-3, 1 - Grass, 2 - Desert, 3 - Dungeon.
-var activeGameStage = greenFieldsLevel;
-var activeMonsterArray = greenFieldsLevel.monsterArray;
+// Game levels 1-3, 0 - Grass, 1 - Desert, 2 - Dungeon.
+var activeGameStageIndex = 0;
+var activeGameStage = gameStagesArray[activeGameStageIndex];
+var activeMonsterArray = activeGameStage.monsterArray;
 
 // Variables for the current word challenge to type.
 var activeWord;
@@ -267,7 +268,13 @@ var setActiveEnemy = function (enemyInput) {
 
 var selectNextEnemy = function () {
     if (bossFight) {
-        alert('Move to next stage');
+        console.log('Onto the next stage');
+        bossFight = false;
+        activeGameStageIndex++;
+        activeGameStage = gameStagesArray[activeGameStageIndex];
+        activeMonsterArray = activeGameStage.monsterArray;
+        enemiesDefeated = 0;
+        // TODO: Change background.
         return;
     }
     if (enemiesDefeated >= activeGameStage.enemiesBeforeBoss) {
