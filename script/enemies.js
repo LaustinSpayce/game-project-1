@@ -37,6 +37,9 @@ level1MonsterArray.push(sheep);
 var brazenBear = new EnemyMonster('Brazen Bear', 20, 2, 'img/enemy/pipo-enemy037a.png', 1, 5);
 level1MonsterArray.push(brazenBear);
 var treeEnemy = new EnemyMonster('Terrifying Tree', 20, 2, 'img/enemy/pipo-enemy006.png', 1, 5);
+level1MonsterArray.push(treeEnemy);
+var greenImp = new EnemyMonster('Green Imp', 22, 3, 'img/enemy/pipo-enemy040a.png', 1, 5);
+level1MonsterArray.push(greenImp);
 var greenLandBoss = new EnemyMonster('Ghastly Ghoul!', 30, 10, 'img/enemy/pipo-boss001.png', 1, 20, true);
 
 
@@ -60,9 +63,30 @@ level2MonsterArray.push(pussInBoots);
 var desertLandBoss = new EnemyMonster('Naughty Necromancer!', 35, 12, 'img/enemy/pipo-boss002.png', 2, 20, true);
 
 
-// Monsters for level 3 (Dungeon):
-var knightEnemy = new EnemyMonster('Silent Knight', 30, 3, 'img/enemy/pipo-enemy018.png', 3, 5);
+// Monsters for level 3 (Cave):
+var knightEnemy = new EnemyMonster('Silent Knight', 30, 13, 'img/enemy/pipo-enemy018.png', 3, 15);
 level3MonsterArray.push(knightEnemy);
+var mushroomEnemy = new EnemyMonster('Mad Mushroom', 30, 15, 'img/enemy/pipo-enemy008b.png', 3, 15);
+level3MonsterArray.push(mushroomEnemy);
+var ghoulishGhost = new EnemyMonster('Ghoulish Ghost', 35, 12, 'img/enemy/pipo-enemy010.png', 3, 15);
+level3MonsterArray.push(ghoulishGhost);
+var depressedZombie = new EnemyMonster('Depressed Zombie', 35, 16, 'img/enemy/pipo-enemy011.png', 3, 15);
+level3MonsterArray.push(depressedZombie);
+var fireElemental = new EnemyMonster('Fire Elemental', 32, 14, 'img/enemy/pipo-enemy012.png', 3, 15);
+level3MonsterArray.push(fireElemental);
+var forumTroll = new EnemyMonster('Forum Troll', 37, 17, 'img/enemy/pipo-enemy013a.png', 3, 15);
+level3MonsterArray.push(forumTroll);
+var angryTroll = new EnemyMonster('Angry Cave Troll', 35, 17, 'img/enemy/pipo-enemy019.png', 3, 15);
+level3MonsterArray.push(angryTroll);
+var dangerousDragon = new EnemyMonster('Dangerous Dragon', 32, 14, 'img/enemy/pipo-enemy021a.png', 3, 15);
+level3MonsterArray.push(dangerousDragon);
+var spookySpider = new EnemyMonster('Spooky Spider', 25, 12, 'img/enemy/pipo-enemy027.png', 3, 15);
+level3MonsterArray.push(spookySpider);
+var mimicMonster = new EnemyMonster('Mimic', 32, 13, 'img/enemy/pipo-enemy032.png', 3, 15);
+level3MonsterArray.push(mimicMonster);
+var spoopySkeleton = new EnemyMonster('Spoopy Skeleton', 32, 16, 'img/enemy/pipo-enemy039.png', 3, 15);
+level3MonsterArray.push(spoopySkeleton);
+var caveBoss = new EnemyMonster('Swole Dragon', 50, 55, 'img/enemy/pipo-boss004.png', 3, 50, true);
 
 
 function randomiseArrayOrder(array) {
@@ -78,10 +102,17 @@ function randomiseArrayOrder(array) {
 }
 
 
+// Might as well shuffle them now as well as later.
+randomiseArrayOrder(level1MonsterArray);
+randomiseArrayOrder(level2MonsterArray);
+randomiseArrayOrder(level3MonsterArray);
+
+
 // Create the levels as objects.
 var greenFieldsLevel = new StageLevel("Green Fields", 'battle-background-forest', level1MonsterArray, greenLandBoss, 3);
-var dustyDesertLevel = new StageLevel("Dusty Desert", 'battle-background-desert', level2MonsterArray, desertLandBoss, 3);
+var dustyDesertLevel = new StageLevel("Dusty Desert", 'battle-background-desert', level2MonsterArray, desertLandBoss, 4);
+var creepyCavesLevel = new StageLevel("Creepy Caves", 'battle-background-cave', level3MonsterArray, caveBoss, 5);
 
 
 // Levels stored in one array.
-var gameStagesArray = [greenFieldsLevel, dustyDesertLevel];
+var gameStagesArray = [greenFieldsLevel, dustyDesertLevel, creepyCavesLevel];

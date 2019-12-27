@@ -16,6 +16,13 @@
 	background-repeat: repeat-x;
 }
 
+.battle-background-cave {
+	background-image: url(../img/backgrounds/backgroundcave.png);
+	background-color: rgb(21, 21, 28);
+	background-position: 0px 0px;
+	background-repeat: repeat-x;
+}
+
 /* Annoyingly Mozilla/Firefox supports crisp-edges but not pixelated.
 And google chrome supports pixelated but not crisp-edges. */
 .pixelated {
