@@ -19,6 +19,7 @@ var playerHPText = document.querySelector('#playerHP');
 var playerMaxHPText = document.querySelector('#playerMaxHP');
 var playerDamageText = document.querySelector('#playerDamageText');
 var playerImage = document.querySelector('#playerImage');
+var playerXPBar = document.querySelector('#playerXPBar');
 
 // Enemy UI Elements
 var enemyNameText = document.querySelector('#enemyName');
@@ -41,7 +42,6 @@ var beginGameButton = document.querySelector('#beginGame');
 
 // Global variables
 var playerName = "playerName";
-var playerLevel = 1;
 var playerMaxHP = 5;
 var playerHP = 5;
 var gameOver = true;
@@ -56,6 +56,11 @@ var maxWordLength = 10;
 var adventurerImage = 'img/playerCharacter/Elf-idle-00.png';
 var warriorImage = 'img/playerCharacter/knight-idle-00.png';
 var wizardImage = 'img/playerCharacter/witch-idle-00.png';
+
+var playerLevel = 1;
+var playerXPToNextLevel = playerLevel * 10;
+var playerTotalXP = 0;
+var playerHealthGainedPerLevel = 5;
 
 // Game levels 1-3, 0 - Grass, 1 - Desert, 2 - Dungeon.
 var activeGameStageIndex = 0;
@@ -75,7 +80,7 @@ var enemyHP = 5;
 var enemyMaxHP = 5;
 var enemyDamage = 1;
 var bossFight = false;
-
+var enemyXP = 0;
 
 // Checks the input box against the word/phrase.
 var checkWordMatched = function (event) {
@@ -105,14 +110,6 @@ var checkWordMatched = function (event) {
         this.value = "";
         damageEnemy();
         updateScore();
-        if (enemyHP <= 0) {
-            // console.log(activeEnemyName + ' slain!');
-            // alert('You have defeated ' + activeEnemyName);
-            // gameOver = true;
-            // mainInputBox.setAttribute('disabled', true);
-            enemiesDefeated++;
-            selectNextEnemy();
-        }
         chooseNewWords();
     }
 };
@@ -216,6 +213,7 @@ var beginGame = function () {
         toggleContainerVisibility(heroSelectScreen);
         toggleContainerVisibility(gameplayMainContainer);
         beginNewStage();
+        updateXPBar();
     }
 }
 
@@ -262,6 +260,7 @@ var setActiveEnemy = function (enemyInput) {
     enemyHP = enemyInput.startHP;
     var enemyGraphic = enemyInput.graphic;
     enemyImage.src = enemyGraphic;
+    enemyXP = enemyInput.xpAwarded
     updateEnemyDetails();
     updateEnemyHP();
 }
@@ -304,10 +303,19 @@ var selectNextEnemy = function () {
 var damageEnemy = function () {
     // 5 points base damage + 1 point per level + 1-5 random points.
     var damageDealt = playerBaseDamage + (playerLevel * playerDamageMultiplier) + Math.floor(Math.random() * playerBaseDamage);
-    console.log(damageDealt + " damage! Oof Ow Socko!");
+    // console.log(damageDealt + " damage! Oof Ow Socko!");
     enemyHP -= damageDealt;
     enemyHP = (enemyHP < 0) ? 0 : enemyHP; // if HP is less than 0 set it to 0.
     damageTextAppear(damageDealt, enemyDamageText);
+    if (enemyHP <= 0) {
+        // console.log(activeEnemyName + ' slain!');
+        // alert('You have defeated ' + activeEnemyName);
+        // gameOver = true;
+        // mainInputBox.setAttribute('disabled', true);
+        enemiesDefeated++;
+        earnExperiencePoints(enemyXP);
+        selectNextEnemy();
+    }
     updateEnemyHP();
 }
 
@@ -376,6 +384,40 @@ var hitEnterToBeginGame = function () {
     }
 }
 
+
+// XP System:
+// Start at level 1.
+// 1->2: 10XP
+// 2->3: 20XP
+// 3->4: 30XP and so on...
+
+var earnExperiencePoints = function (xpEarned) {
+    playerTotalXP += xpEarned;
+    while (playerTotalXP >= playerXPToNextLevel) {
+        playerLevelUp();
+    }
+    updateXPBar();
+}
+
+
+var playerLevelUp = function () {
+    playerLevel++;
+    playerMaxHP += playerHealthGainedPerLevel;
+    playerHP = playerMaxHP;
+    updateHP();
+    playerXPToNextLevel += (playerLevel * 10)
+    updateXPBar();
+    // TODO: RESET HEALTH
+    // TODO: Play animation + sound effect for levelling up.
+}
+
+
+var updateXPBar = function () {
+    playerLevelText.textContent = "Level " + playerLevel;
+    // TODO: Update an XP progress bar undernearth the player's stats.
+    var ExperiencePercentage = Math.floor((playerTotalXP / playerXPToNextLevel) * 100);
+    playerXPBar.style.width = ExperiencePercentage + "%";
+}
 
 // Add event listeners to everything, has to be below the function declarations.
 mainInputBox.addEventListener('keyup', checkWordMatched);
