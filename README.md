@@ -42,3 +42,4 @@ If you make consecutive mistakes without a correct character being typed in, you
 * bevouliin.com
 * pipoya - https://itch.io/profile/pipoya
 * craftpix.net
+* Animate.css - https://daneden.github.io/animate.css/
