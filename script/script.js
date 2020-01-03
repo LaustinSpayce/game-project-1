@@ -86,6 +86,10 @@ var enemyXP = 0;
 var checkWordMatched = function (event) {
     var inputValue = this.value;
 
+    if (bossFight) {
+        activeGameStage.stageBoss.bossSpecialAttack();
+    }
+
     // Check word partially matches what has been typed in so far.
     if (inputValue === activeWord.slice(0, inputValue.length)) {
         remainingToTypePortion = activeWord.slice(inputValue.length);

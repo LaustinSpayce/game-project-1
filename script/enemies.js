@@ -6,6 +6,11 @@ var EnemyMonster = function (name, startHP = 10, level = 5, graphic, activeLevel
     this.isBoss = isBoss;
     this.activeLevel = activeLevel;
     this.xpAwarded = xpAwarded;
+    // The Boss special attack will be triggered with every key press the player makes, if the boss has an attack.
+    this.bossSpecialAttack = function () {
+        console.log('Boss Special Attack Activated');
+        return;
+    }
 }
 
 var StageLevel = function (levelName, backgroundImageClass, monsterArray, stageBoss, enemiesBeforeBoss) {
@@ -42,6 +47,8 @@ var greenImp = new EnemyMonster('Green Imp', 22, 3, 'img/enemy/pipo-enemy040a.pn
 level1MonsterArray.push(greenImp);
 var greenLandBoss = new EnemyMonster('Ghastly Ghoul!', 30, 10, 'img/enemy/pipo-boss001.png', 1, 20, true);
 
+// Special attack for the Green Land Boss:
+// Define it here (add an extra character or something?)
 
 // Monsters for level 2 (Desert):
 var sneakySnakeEnemy = new EnemyMonster('Sneaky Snake', 20, 5, "img/enemy/pipo-enemy003.png", 2, 10,);
@@ -62,6 +69,8 @@ var pussInBoots = new EnemyMonster('Puss in Boots', 30, 9, 'img/enemy/pipo-enemy
 level2MonsterArray.push(pussInBoots);
 var desertLandBoss = new EnemyMonster('Naughty Necromancer!', 35, 12, 'img/enemy/pipo-boss002.png', 2, 20, true);
 
+// Special Attack for the Desert Land Boss.
+// Add one extra word to the end of the string.
 
 // Monsters for level 3 (Cave):
 var knightEnemy = new EnemyMonster('Silent Knight', 30, 13, 'img/enemy/pipo-enemy018.png', 3, 15);
@@ -87,6 +96,9 @@ level3MonsterArray.push(mimicMonster);
 var spoopySkeleton = new EnemyMonster('Spoopy Skeleton', 32, 16, 'img/enemy/pipo-enemy039.png', 3, 15);
 level3MonsterArray.push(spoopySkeleton);
 var caveBoss = new EnemyMonster('Swole Dragon', 50, 55, 'img/enemy/pipo-boss004.png', 3, 50, true);
+
+// Cave Boss Special Attack:
+// CHANGE the final word in the string to a different word.
 
 
 function randomiseArrayOrder(array) {
