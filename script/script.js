@@ -322,8 +322,10 @@ var damageEnemy = function () {
 
 var damageTextAppear = function (damage, targetBox) {
     targetBox.textContent = damage;
+    targetBox.classList.add('animated', 'bounce');
     var damageTextBoxReset = setTimeout(function () {
         targetBox.textContent = "";
+        targetBox.classList.remove('animated', 'bounce');
     }, 1000);
 }
 

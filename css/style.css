@@ -41,6 +41,12 @@ And google chrome supports pixelated but not crisp-edges. */
 	font-size: 4em;
 }
 
+.text-to-type-display {
+	-webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+}
+
 .choose-your-hero {
 	background-repeat: no-repeat;
 	height: 200px;
