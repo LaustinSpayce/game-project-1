@@ -20,10 +20,13 @@ If you make consecutive mistakes without a correct character being typed in, you
 * Each successful phrase completed is an "attack".
 * Levels to go through:
     * Grassy Field
+    * Dusty Desert
+    * Creepy Caves
+* Some light RPG-style levelling up and damage progression.
+* Special boss attacks in levels 2 and 3.
 
 ## Features to implement
 * Each mistake locks the player as the monster "attacks".
-* Some light RPG-style levelling up and damage progression.
 * A randomised or semi-random group of enemies to attack (just name and maybe HP level changes:)
     * Internet troll
     * Sticky keys
@@ -31,11 +34,6 @@ If you make consecutive mistakes without a correct character being typed in, you
     * Unfunny meme
     * Pepe the frog
     * Inconsistent bugs
-* More levels to go through:
-    * Dusty Desert
-    * Dark Dungeon
-* Special "boss attack" that will change the final word after you've typed the first 1 or 2 words.
-* Maybe the boss will increase the number of words you have to type by 1.
 * Add simple animations.
 * Add sound effects and maybe music.
 
