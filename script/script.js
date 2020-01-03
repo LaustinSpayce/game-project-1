@@ -215,7 +215,7 @@ var beginGame = function () {
         console.log('game begin');
         mainInputBox.removeAttribute('disabled');
         wronglyTypedPortion = "";
-        wronglyTypedDisplay.textContent = wronglyTypedPortion; 
+        wronglyTypedDisplay.textContent = wronglyTypedPortion;
         toggleContainerVisibility(heroSelectScreen);
         toggleContainerVisibility(gameplayMainContainer);
         beginNewStage();
@@ -292,9 +292,10 @@ var selectNextEnemy = function () {
         bossFight = false;
         gameplayMainContainer.classList.remove(activeGameStage.backgroundImageClass);
         activeGameStageIndex++;
-        if (checkIfGameWon()) { return; }
+        if (checkIfGameWon()) {
+            return;
+        }
         beginNewStage();
-        // TODO: Change background.
         return;
     }
     if (enemiesDefeated >= activeGameStage.enemiesBeforeBoss) {

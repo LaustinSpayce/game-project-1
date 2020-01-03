@@ -54,7 +54,7 @@ greenLandBoss.bossSpecialAttack = function () {
 }
 
 // Monsters for level 2 (Desert):
-var sneakySnakeEnemy = new EnemyMonster('Sneaky Snake', 20, 5, "img/enemy/pipo-enemy003.png", 2, 10,);
+var sneakySnakeEnemy = new EnemyMonster('Sneaky Snake', 20, 5, "img/enemy/pipo-enemy003.png", 2, 10, );
 level2MonsterArray.push(sneakySnakeEnemy);
 var scarabBeetleEnemy = new EnemyMonster('Beastly Beetle', 25, 5, 'img/enemy/pipo-enemy004.png', 2, 10);
 level2MonsterArray.push(scarabBeetleEnemy);
@@ -62,7 +62,7 @@ var creepyWorm = new EnemyMonster('Worried Worm', 15, 5, "img/enemy/pipo-enemy00
 level2MonsterArray.push(creepyWorm);
 var cuteBlob = new EnemyMonster('Cute Blob', 15, 5, 'img/enemy/pipo-enemy009a.png', 2, 10);
 level2MonsterArray.push(cuteBlob);
-var salamanderEnemy = new EnemyMonster('Suspicious Salamander', 20, 8, 'img/enemy/pipo-enemy016.png', 2, 10 );
+var salamanderEnemy = new EnemyMonster('Suspicious Salamander', 20, 8, 'img/enemy/pipo-enemy016.png', 2, 10);
 level2MonsterArray.push(salamanderEnemy);
 var griffinEnemy = new EnemyMonster('Griffin', 25, 6, 'img/enemy/pipo-enemy022.png', 2, 10);
 level2MonsterArray.push(griffinEnemy);
@@ -78,6 +78,8 @@ desertLandBoss.bossSpecialAttack = function () {
     if (bossSpecialUsed) {
         return;
     }
+
+    // wait until the player has typed a few letters before adding the word.
     if (correctlyTypedPortion.length >= (activeWord.length / 2)) {
         var newWordIndex = Math.floor(Math.random() * wordDictionary.length);
         while (wordDictionary[newWordIndex].length > maxWordLength) {
@@ -87,9 +89,9 @@ desertLandBoss.bossSpecialAttack = function () {
         activeWord = activeWord.trim();
         updateWordDisplay();
         bossSpecialUsed = true;
-        console.log('Add an extra word to the question');
+        // console.log('Add an extra word.');
         return;
-    }   
+    }
 }
 
 // Monsters for level 3 (Cave):
@@ -120,8 +122,46 @@ var caveBoss = new EnemyMonster('Swole Dragon', 50, 55, 'img/enemy/pipo-boss004.
 // Cave Boss Special Attack:
 // CHANGE the final word in the string to a different word.
 caveBoss.bossSpecialAttack = function () {
-    console.log('Cave Boss Special Attack!');
-    return;
+
+    if (bossSpecialUsed) {
+        return;
+    }
+    // Split the active phrase into an array of words.
+    var activeWordArray = activeWord.split(" ");
+
+    // If only 1 word, add a second word (any length to make it harder).
+    if (activeWordArray.length === 1) {
+        if (correctlyTypedPortion.length >= (activeWord.length / 2)) {
+            var newWordIndex = Math.floor(Math.random() * wordDictionary.length);
+            activeWord += " " + wordDictionary[newWordIndex];
+            activeWord = activeWord.trim();
+            updateWordDisplay();
+            bossSpecialUsed = true;
+        }
+        return;
+    }
+
+    // If 2+ words, partway through, change the final word to another word.
+
+    // Create a word array less the final word, which will be changed.
+    var activeStringLessFinalWord = "";
+    for (let i = 0; i < (activeWordArray.length - 1); i++) {
+        activeStringLessFinalWord += activeWordArray[i] + " ";
+    }
+
+    // Create one word and swap it for the final word in the string.
+    if (correctlyTypedPortion.length >= ((3 * activeStringLessFinalWord.length) / 4)) {
+        var newWordIndex = Math.floor(Math.random() * wordDictionary.length);
+        while (wordDictionary[newWordIndex].length > maxWordLength) {
+            var newWordIndex = Math.floor(Math.random() * wordDictionary.length);
+        }
+        activeStringLessFinalWord += wordDictionary[newWordIndex];
+        activeWord = activeStringLessFinalWord.trim();
+        updateWordDisplay();
+        bossSpecialUsed = true;
+        // console.log('Add an extra word.');
+        return;
+    }
 }
 
 
