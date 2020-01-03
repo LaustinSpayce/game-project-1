@@ -81,6 +81,7 @@ var enemyMaxHP = 5;
 var enemyDamage = 1;
 var bossFight = false;
 var enemyXP = 0;
+var bossSpecialUsed = false;
 
 // Checks the input box against the word/phrase.
 var checkWordMatched = function (event) {
@@ -112,6 +113,7 @@ var checkWordMatched = function (event) {
     if (inputValue === activeWord) {
         console.log("word matched!");
         this.value = "";
+        bossSpecialUsed = false; // Reset the boss special attack when the word is matched.
         damageEnemy();
         updateScore();
         chooseNewWords();
@@ -423,6 +425,24 @@ var updateXPBar = function () {
     // TODO: Update an XP progress bar undernearth the player's stats.
     var ExperiencePercentage = Math.floor((playerTotalXP / playerXPToNextLevel) * 100);
     playerXPBar.style.width = ExperiencePercentage + "%";
+}
+
+
+// Cheat function to skip to the boss fight of that level.
+var cheatSkipToBossFight = function () {
+    enemiesDefeated = activeGameStage.enemiesBeforeBoss;
+    bossFight = true;
+    setActiveEnemy(activeGameStage.stageBoss);
+}
+
+
+// Cheat function to skip the current enemy.
+var cheatDefeatCurrentEnemy = function () {
+    enemyHP = 0;
+    enemiesDefeated++;
+    earnExperiencePoints(enemyXP);
+    selectNextEnemy();
+    updateEnemyHP();
 }
 
 // Add event listeners to everything, has to be below the function declarations.

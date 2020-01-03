@@ -48,7 +48,10 @@ level1MonsterArray.push(greenImp);
 var greenLandBoss = new EnemyMonster('Ghastly Ghoul!', 30, 10, 'img/enemy/pipo-boss001.png', 1, 20, true);
 
 // Special attack for the Green Land Boss:
-// Define it here (add an extra character or something?)
+greenLandBoss.bossSpecialAttack = function () {
+    console.log('Green Land Boss Attack!');
+    return;
+}
 
 // Monsters for level 2 (Desert):
 var sneakySnakeEnemy = new EnemyMonster('Sneaky Snake', 20, 5, "img/enemy/pipo-enemy003.png", 2, 10,);
@@ -70,7 +73,24 @@ level2MonsterArray.push(pussInBoots);
 var desertLandBoss = new EnemyMonster('Naughty Necromancer!', 35, 12, 'img/enemy/pipo-boss002.png', 2, 20, true);
 
 // Special Attack for the Desert Land Boss.
-// Add one extra word to the end of the string.
+// Add one extra word to the end of the string for player to type.
+desertLandBoss.bossSpecialAttack = function () {
+    if (bossSpecialUsed) {
+        return;
+    }
+    if (correctlyTypedPortion.length >= (activeWord.length / 2)) {
+        var newWordIndex = Math.floor(Math.random() * wordDictionary.length);
+        while (wordDictionary[newWordIndex].length > maxWordLength) {
+            var newWordIndex = Math.floor(Math.random() * wordDictionary.length);
+        }
+        activeWord += " " + wordDictionary[newWordIndex];
+        activeWord = activeWord.trim();
+        updateWordDisplay();
+        bossSpecialUsed = true;
+        console.log('Add an extra word to the question');
+        return;
+    }   
+}
 
 // Monsters for level 3 (Cave):
 var knightEnemy = new EnemyMonster('Silent Knight', 30, 13, 'img/enemy/pipo-enemy018.png', 3, 15);
@@ -99,6 +119,10 @@ var caveBoss = new EnemyMonster('Swole Dragon', 50, 55, 'img/enemy/pipo-boss004.
 
 // Cave Boss Special Attack:
 // CHANGE the final word in the string to a different word.
+caveBoss.bossSpecialAttack = function () {
+    console.log('Cave Boss Special Attack!');
+    return;
+}
 
 
 function randomiseArrayOrder(array) {
