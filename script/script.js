@@ -57,6 +57,9 @@ var maxWordLength = 10;
 var adventurerImage = 'img/playerCharacter/Elf-idle-00.png';
 var warriorImage = 'img/playerCharacter/knight-idle-00.png';
 var wizardImage = 'img/playerCharacter/witch-idle-00.png';
+// time to type the phrase in ms.
+var timeToTypePhrase = 5000;
+var phraseTimer;
 
 var playerLevel = 1;
 var playerXPToNextLevel = playerLevel * 10;
@@ -108,7 +111,7 @@ var checkWordMatched = function (event) {
 
     // if the input equals the full active phrase.
     if (inputValue === activeWord) {
-        console.log("word matched!");
+        stopPhraseTimer();
         this.value = "";
         bossSpecialUsed = false; // Reset the boss special attack when the word is matched.
         damageEnemy();
@@ -151,6 +154,7 @@ var chooseNewWords = function () {
     updateWordDisplay();
     updateEnemyHP();
     updateEnemyDetails();
+    startPhraseTimer();
     // if it's a boss fight let the boss do their trick first.
     if (bossFight) {
         activeGameStage.stageBoss.bossSpecialAttack();
@@ -186,6 +190,29 @@ var wrongLetterTyped = function () {
     }
     updateWordDisplay();
     checkGameOver();
+}
+
+
+var startPhraseTimer = function () {
+    phraseTimer = setTimeout(ranOutOfTime, timeToTypePhrase);
+}
+
+
+var stopPhraseTimer = function () {
+    if (phraseTimer) {
+    clearTimeout(phraseTimer);
+    phraseTimer = null;
+    }
+}
+
+
+var ranOutOfTime = function () {
+    phraseTimer = null;
+    mistakeMade = false;
+    wrongLetterTyped();
+    console.log('Ran out of time, making new phrase');
+    wronglyTypedPortion = "";
+    chooseNewWords();
 }
 
 
@@ -286,6 +313,7 @@ var beginNewStage = function () {
     enemiesDefeated = 0;
     playerHP = playerMaxHP;
     selectNextEnemy();
+    stopPhraseTimer();
     chooseNewWords();
     updateScore();
     mainInputBox.focus();
@@ -359,16 +387,19 @@ var heroSelection = function () {
             wordsPerBox = 1;
             maxWordLength = 5;
             playerImage.src = adventurerImage;
+            phraseTimer = 5000; // 5 second timer.
             break;
         case 'chooseWarrior':
             wordsPerBox = 2;
             maxWordLength = 7;
             playerImage.src = warriorImage;
+            phraseTimer = 10000; // 10 second timer.
             break;
         case 'chooseWizard':
             wordsPerBox = 3;
             maxWordLength = 10;
             playerImage.src = wizardImage;
+            phraseTimer = 15000; // 15 second timer.
             break;
         default:
             console.log('Something went wrong selecting the hero');
