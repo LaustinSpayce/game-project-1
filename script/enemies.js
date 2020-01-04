@@ -49,8 +49,21 @@ var greenLandBoss = new EnemyMonster('Ghastly Ghoul!', 30, 10, 'img/enemy/pipo-b
 
 // Special attack for the Green Land Boss:
 greenLandBoss.bossSpecialAttack = function () {
-    console.log('Green Land Boss Attack!');
-    return;
+    // The boss' "special attack" is to only display the next letter to type.
+    // The phrase to type will have all spaces removed soitwillbeonelongword.
+
+    // Hide the regular word display. (When boss dies set it to none)
+    if (!wordDisplay.classList.contains('d-none')) {
+        wordDisplay.classList.add('d-none');
+        specialWordDisplay.textContent = activeWord[0];
+        return;
+    }
+
+    // Remove all spaces in the current activeWord string.
+    activeWord = activeWord.replace(/\s/g, ''); // Regular expression to remove all white space.
+    specialWordDisplay.textContent = activeWord[correctlyTypedPortion.length];
+    // console.log('Green Land Boss Attack!');
+    // return;
 }
 
 // Monsters for level 2 (Desert):

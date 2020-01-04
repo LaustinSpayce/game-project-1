@@ -4,6 +4,7 @@ console.log("Script Loaded!")
 var gameplayMainContainer = document.querySelector('#gameplayMainContainer');
 var mainInputBox = document.querySelector('#mainInput');
 var wordDisplay = document.querySelector('#wordDisplay');
+var specialWordDisplay = document.querySelector('#specialWordDisplay');
 var correctlyTypedDisplay = document.querySelector('#correctlyTypedPortion');
 var wronglyTypedDisplay = document.querySelector('#wronglyTypedPortion');
 var completeWordHint = document.querySelector('#completeWord');
@@ -87,10 +88,6 @@ var bossSpecialUsed = false;
 var checkWordMatched = function (event) {
     var inputValue = this.value;
 
-    if (bossFight) {
-        activeGameStage.stageBoss.bossSpecialAttack();
-    }
-
     // Check word partially matches what has been typed in so far.
     if (inputValue === activeWord.slice(0, inputValue.length)) {
         remainingToTypePortion = activeWord.slice(inputValue.length);
@@ -117,6 +114,10 @@ var checkWordMatched = function (event) {
         damageEnemy();
         updateScore();
         chooseNewWords();
+    }
+
+    if (bossFight) {
+        activeGameStage.stageBoss.bossSpecialAttack();
     }
 };
 
@@ -145,10 +146,15 @@ var chooseNewWords = function () {
     activeWord = activeWord.trim();
     correctlyTypedPortion = "";
     remainingToTypePortion = activeWord;
+    specialWordDisplay.textContent = "";
     updateHP();
     updateWordDisplay();
     updateEnemyHP();
     updateEnemyDetails();
+    // if it's a boss fight let the boss do their trick first.
+    if (bossFight) {
+        activeGameStage.stageBoss.bossSpecialAttack();
+    }
 }
 
 
@@ -292,6 +298,11 @@ var selectNextEnemy = function () {
         bossFight = false;
         gameplayMainContainer.classList.remove(activeGameStage.backgroundImageClass);
         activeGameStageIndex++;
+        // un-hide the word Display if it's hidden
+        if (wordDisplay.classList.contains('d-none')) {
+            wordDisplay.classList.remove('d-none');
+            specialWordDisplay.textContent = "";
+        }
         if (checkIfGameWon()) {
             return;
         }
