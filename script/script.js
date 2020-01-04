@@ -431,7 +431,7 @@ var toggleContainerVisibility = function (pageElement) {
     // if (pageElement.classList.contains('d-none')) {
     //     pageElement.classList.remove('d-none');
     // } else {
-    //     pageElement.classList.add('d-none');
+    //     pageElement.classList.add('d-none'); 
     // }
 }
 
