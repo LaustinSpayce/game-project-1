@@ -58,6 +58,13 @@ greenLandBoss.bossSpecialAttack = function () {
         specialWordDisplay.textContent = activeWord[0];
     }
 
+    // This boss is difficult so remove the timer.
+    if (phraseTimer) {
+        console.log('stopping ' + phraseTimer);
+        clearTimeout(phraseTimer);
+        phraseTimer = null;
+    }
+
     // Remove all spaces in the current activeWord string.
     activeWord = activeWord.replace(/\s/g, ''); // Regular expression to remove all white space.
     specialWordDisplay.textContent = activeWord[correctlyTypedPortion.length];

@@ -195,10 +195,12 @@ var wrongLetterTyped = function () {
 
 var startPhraseTimer = function () {
     phraseTimer = setTimeout(ranOutOfTime, timeToTypePhrase);
+    console.log('Starting ' + phraseTimer);
 }
 
 
 var stopPhraseTimer = function () {
+    console.log('stopping ' + phraseTimer);
     if (phraseTimer) {
     clearTimeout(phraseTimer);
     phraseTimer = null;
@@ -207,6 +209,9 @@ var stopPhraseTimer = function () {
 
 
 var ranOutOfTime = function () {
+    if (!phraseTimer) {
+        return;
+    }
     phraseTimer = null;
     mistakeMade = false;
     wrongLetterTyped();
@@ -220,6 +225,7 @@ var ranOutOfTime = function () {
 var checkGameOver = function () {
     updateScore();
     if (playerHP <= 0) {
+        stopPhraseTimer();
         console.log('game over')
         gameOver = true;
         mainInputBox.setAttribute('disabled', true);
