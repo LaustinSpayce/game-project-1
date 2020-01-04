@@ -427,11 +427,12 @@ var checkIfCanStartGame = function () {
 
 
 var toggleContainerVisibility = function (pageElement) {
-    if (pageElement.classList.contains('d-none')) {
-        pageElement.classList.remove('d-none');
-    } else {
-        pageElement.classList.add('d-none');
-    }
+    pageElement.classList.toggle('d-none');
+    // if (pageElement.classList.contains('d-none')) {
+    //     pageElement.classList.remove('d-none');
+    // } else {
+    //     pageElement.classList.add('d-none');
+    // }
 }
 
 
