@@ -31,7 +31,7 @@ var level3MonsterArray = [];
 // Monsters for level 1 (green fields);
 var grassLandBat = new EnemyMonster('Bad Bat', 15, 1, "img/enemy/pipo-enemy001.png", 1, 5);
 level1MonsterArray.push(grassLandBat);
-var angryChicken = new EnemyMonster('Angry Chicken', 20, 2, 'img/enemy/pipo-enemy036.png', 1, 5);
+var angryChicken = new EnemyMonster('Cheeky Chicken', 20, 2, 'img/enemy/pipo-enemy036.png', 1, 5);
 level1MonsterArray.push(angryChicken);
 var babyChick = new EnemyMonster('Baby Bird', 15, 1, 'img/enemy/pipo-enemy035.png', 1, 5);
 level1MonsterArray.push(babyChick);
@@ -43,7 +43,7 @@ var brazenBear = new EnemyMonster('Brazen Bear', 20, 2, 'img/enemy/pipo-enemy037
 level1MonsterArray.push(brazenBear);
 var treeEnemy = new EnemyMonster('Terrifying Tree', 20, 2, 'img/enemy/pipo-enemy006.png', 1, 5);
 level1MonsterArray.push(treeEnemy);
-var greenImp = new EnemyMonster('Green Imp', 22, 3, 'img/enemy/pipo-enemy040a.png', 1, 5);
+var greenImp = new EnemyMonster('Impatient Imp', 22, 3, 'img/enemy/pipo-enemy040a.png', 1, 5);
 level1MonsterArray.push(greenImp);
 var greenLandBoss = new EnemyMonster('Ghastly Ghoul!', 30, 10, 'img/enemy/pipo-boss001.png', 1, 20, true);
 
@@ -52,11 +52,10 @@ greenLandBoss.bossSpecialAttack = function () {
     // The boss' "special attack" is to only display the next letter to type.
     // The phrase to type will have all spaces removed soitwillbeonelongword.
 
-    // Hide the regular word display. (When boss dies set it to none)
+    // Hide the regular word display. (When boss dies bring it back)
     if (!wordDisplay.classList.contains('d-none')) {
         wordDisplay.classList.add('d-none');
         specialWordDisplay.textContent = activeWord[0];
-        return;
     }
 
     // Remove all spaces in the current activeWord string.
@@ -77,7 +76,7 @@ var cuteBlob = new EnemyMonster('Cute Blob', 15, 5, 'img/enemy/pipo-enemy009a.pn
 level2MonsterArray.push(cuteBlob);
 var salamanderEnemy = new EnemyMonster('Suspicious Salamander', 20, 8, 'img/enemy/pipo-enemy016.png', 2, 10);
 level2MonsterArray.push(salamanderEnemy);
-var griffinEnemy = new EnemyMonster('Griffin', 25, 6, 'img/enemy/pipo-enemy022.png', 2, 10);
+var griffinEnemy = new EnemyMonster('Gorgeous Griffin', 25, 6, 'img/enemy/pipo-enemy022.png', 2, 10);
 level2MonsterArray.push(griffinEnemy);
 var scorpionEnemy = new EnemyMonster('Scorching Scorpion', 25, 8, 'img/enemy/pipo-enemy028b.png', 2, 10);
 level2MonsterArray.push(scorpionEnemy);
