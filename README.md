@@ -23,7 +23,7 @@ If you make consecutive mistakes without a correct character being typed in, you
     * Dusty Desert
     * Creepy Caves
 * Some light RPG-style levelling up and damage progression.
-* Special boss attacks in levels 2 and 3.
+* Special boss attacks/features for the three bosses.
 
 ## Features to implement
 * Each mistake locks the player as the monster "attacks".
