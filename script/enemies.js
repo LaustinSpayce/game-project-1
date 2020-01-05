@@ -107,6 +107,12 @@ desertLandBoss.bossSpecialAttack = function () {
         activeWord += " " + wordDictionary[newWordIndex];
         activeWord = activeWord.trim();
         updateWordDisplay();
+        // ** The animation doesn't appear to be working as-is. ***
+        // wordDisplay.classList.add('animated', 'bounce');
+        // console.log('bounce!');
+        // var wordDisplayReset = setTimeout(function () {
+        //     wordDisplay.classList.remove('animated', 'bounce');
+        // }, 1000);
         bossSpecialUsed = true;
         // console.log('Add an extra word.');
         return;

@@ -194,6 +194,11 @@ var wrongLetterTyped = function () {
 
 
 var startPhraseTimer = function () {
+    if (phraseTimer) {
+        console.log('Force stopping timer ' + phraseTimer);
+        clearTimeout(phraseTimer);
+        phraseTimer = null;
+    }
     phraseTimer = setTimeout(ranOutOfTime, timeToTypePhrase);
     console.log('Starting ' + phraseTimer);
 }
