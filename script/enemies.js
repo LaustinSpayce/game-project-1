@@ -62,6 +62,7 @@ greenLandBoss.bossSpecialAttack = function () {
     if (phraseTimer) {
         console.log('stopping ' + phraseTimer);
         clearTimeout(phraseTimer);
+        clearInterval(timeBarTimer);
         phraseTimer = null;
     }
 

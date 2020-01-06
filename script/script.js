@@ -11,6 +11,7 @@ var completeWordHint = document.querySelector('#completeWord');
 var newEnemyButton = document.querySelector('#summonNewEnemy');
 var scoreText = document.querySelector('#scoreText');
 var livesText = document.querySelector('#livesText');
+var timeBar = document.querySelector('#timeBar');
 
 // Player UI Elements
 var playerNameText = document.querySelector('#playerName');
@@ -63,12 +64,13 @@ var wizardImage = 'img/playerCharacter/witch-idle-00.png';
 // time to type the phrase in ms.
 var timeToTypePhrase = 5000;
 var phraseTimer;
+var timeBarTimer;
 var popUpTextContent = "Popup Text";
-
 var playerLevel = 1;
 var playerXPToNextLevel = playerLevel * 10;
 var playerTotalXP = 0;
 var playerHealthGainedPerLevel = 5;
+var timeElapsed = 0;
 
 // Game levels 1-3, 0 - Grass, 1 - Desert, 2 - Dungeon.
 var activeGameStageIndex = 0;
@@ -129,6 +131,21 @@ var checkWordMatched = function (event) {
 };
 
 
+var animateCSS = function (element, animationName, callback) {
+    const node = element;
+    node.classList.add('animated', animationName);
+
+    function handleAnimationEnd() {
+        node.classList.remove('animated', animationName);
+        node.removeEventListener('animationend', handleAnimationEnd);
+
+        if (typeof callback === 'function') callback();
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd);
+}
+
+
 // One function updates the word display to the player.
 var updateWordDisplay = function () {
     correctlyTypedDisplay.textContent = correctlyTypedPortion;
@@ -137,6 +154,11 @@ var updateWordDisplay = function () {
     completeWordHint.textContent = activeWord;
 }
 
+var updateTimeBar = function () {
+    timeElapsed += 20;
+    var timeWidthPercentage = ((timeToTypePhrase - timeElapsed) / timeToTypePhrase ) * 100;
+    timeBar.style.width = timeWidthPercentage + "%";
+}
 
 // Choose new words according to the difficulty.
 var chooseNewWords = function () {
@@ -187,7 +209,7 @@ var wrongLetterTyped = function () {
         // TODO: Freeze the game input
         // Have the enemy swipe the player.
         // Then deduct the HP.
-        console.log('Enemy attack animation.');
+        animateCSS(enemyImage, 'shake');
         playerHP -= enemyDamage; // TODO: Have some small randomisation
         damageTextAppear(enemyDamage, playerDamageText);
         mistakeMade = true;
@@ -205,9 +227,12 @@ var startPhraseTimer = function () {
     if (phraseTimer) {
         console.log('Force stopping timer ' + phraseTimer);
         clearTimeout(phraseTimer);
+        clearInterval(timeBarTimer);
         phraseTimer = null;
     }
     phraseTimer = setTimeout(ranOutOfTime, timeToTypePhrase);
+    timeElapsed = 0;
+    timeBarTimer = setInterval(updateTimeBar, 20);
     console.log('Starting ' + phraseTimer);
 }
 
@@ -216,6 +241,7 @@ var stopPhraseTimer = function () {
     console.log('stopping ' + phraseTimer);
     if (phraseTimer) {
         clearTimeout(phraseTimer);
+        clearInterval(timeBarTimer);
         phraseTimer = null;
     }
 }
@@ -244,8 +270,12 @@ var checkGameOver = function () {
         console.log('game over')
         gameOver = true;
         mainInputBox.setAttribute('disabled', true);
-        toggleContainerVisibility(heroSelectScreen);
-        toggleContainerVisibility(gameplayMainContainer);
+        popUpTextContent = "Game Over!";
+        textPopUp();
+        var backToBeginning = setTimeout(function () {
+            toggleContainerVisibility(heroSelectScreen);
+            toggleContainerVisibility(gameplayMainContainer);
+        }, 1500);
     }
 }
 
@@ -261,10 +291,14 @@ var beginGame = function () {
         return;
     }
     if (gameOver) {
+        playerHP = 5;
+        playerMaxHP = 5;
+        playerLevel = 1;
         playerName = playerNameInput.value.trim().slice(0, 16);
         playerNameText.textContent = playerName;
         playerDamageText.textContent = "";
         enemyDamageText.textContent = "";
+        specialWordDisplay.textContent = "";
         score = 0;
         gameOver = false;
         console.log('game begin');
@@ -342,6 +376,7 @@ var updateEnemyDetails = function () {
 
 
 var setActiveEnemy = function (enemyInput) {
+    animateCSS(enemyImage, "bounceInRight");
     activeEnemyName = enemyInput.name;
     activeEnemyLevel = enemyInput.level;
     enemyMaxHP = enemyInput.startHP;
@@ -383,7 +418,7 @@ var beginNewStage = function () {
 
 var selectNextEnemy = function () {
     if (bossFight) {
-        console.log('Onto the next stage');
+        // console.log('Onto the next stage');
         bossFight = false;
         gameplayMainContainer.classList.remove(activeGameStage.backgroundImageClass);
         activeGameStageIndex++;
@@ -413,6 +448,8 @@ var damageEnemy = function () {
     // console.log(damageDealt + " damage! Oof Ow Socko!");
     enemyHP -= damageDealt;
     enemyHP = (enemyHP < 0) ? 0 : enemyHP; // if HP is less than 0 set it to 0.
+    animateCSS(playerImage, 'shake')
+    playerImage.classList.add('animated', 'shake');
     damageTextAppear(damageDealt, enemyDamageText);
     if (enemyHP <= 0) {
         // console.log(activeEnemyName + ' slain!');
@@ -421,7 +458,7 @@ var damageEnemy = function () {
         // mainInputBox.setAttribute('disabled', true);
         enemiesDefeated++;
         earnExperiencePoints(enemyXP);
-        selectNextEnemy();
+        animateCSS(enemyImage, 'fadeOutRight', selectNextEnemy);
     }
     updateEnemyHP();
 }
@@ -448,19 +485,19 @@ var heroSelection = function () {
             wordsPerBox = 1;
             maxWordLength = 5;
             playerImage.src = adventurerImage;
-            phraseTimer = 5000; // 5 second timer.
+            timeToTypePhrase = 5000; // 10 second timer.
             break;
         case 'chooseWarrior':
             wordsPerBox = 2;
             maxWordLength = 7;
             playerImage.src = warriorImage;
-            phraseTimer = 10000; // 10 second timer.
+            timeToTypePhrase = 7500; // 15 second timer.
             break;
         case 'chooseWizard':
             wordsPerBox = 3;
             maxWordLength = 10;
             playerImage.src = wizardImage;
-            phraseTimer = 15000; // 15 second timer.
+            timeToTypePhrase = 10000; // 20 second timer.
             break;
         default:
             console.log('Something went wrong selecting the hero');

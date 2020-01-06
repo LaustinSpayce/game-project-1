@@ -104,3 +104,18 @@ And google chrome supports pixelated but not crisp-edges. */
 	color: goldenrod;
 	text-shadow: 2px 2px black;
 }
+
+#playerImage {
+	display: inline-block;
+}
+
+#enemyImage {
+	display: inline-block;
+}
+
+#timeBar {
+	height: 50px;
+	background-color: blueviolet;
+	width: 100%;
+	margin: 5px 10px;
+}
