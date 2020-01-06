@@ -109,7 +109,7 @@ desertLandBoss.bossSpecialAttack = function () {
         updateWordDisplay();
         // ** The animation doesn't appear to be working as-is. ***
         wordDisplay.classList.add('animated', 'bounce');
-        console.log('bounce!');
+        // console.log('bounce!');
         var wordDisplayReset = setTimeout(function () {
             wordDisplay.classList.remove('animated', 'bounce');
         }, 1000);
@@ -183,6 +183,11 @@ caveBoss.bossSpecialAttack = function () {
         activeStringLessFinalWord += wordDictionary[newWordIndex];
         activeWord = activeStringLessFinalWord.trim();
         updateWordDisplay();
+        wordDisplay.classList.add('animated', 'bounce', 'bg-info');
+        // console.log('bounce!');
+        var wordDisplayReset = setTimeout(function () {
+            wordDisplay.classList.remove('animated', 'bounce', 'bg-info');
+        }, 1000);
         bossSpecialUsed = true;
         // console.log('Add an extra word.');
         return;

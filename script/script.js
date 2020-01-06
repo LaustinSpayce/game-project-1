@@ -215,8 +215,8 @@ var startPhraseTimer = function () {
 var stopPhraseTimer = function () {
     console.log('stopping ' + phraseTimer);
     if (phraseTimer) {
-    clearTimeout(phraseTimer);
-    phraseTimer = null;
+        clearTimeout(phraseTimer);
+        phraseTimer = null;
     }
 }
 
@@ -231,7 +231,7 @@ var ranOutOfTime = function () {
     console.log('Ran out of time, making new phrase');
     wronglyTypedPortion = "";
     if (playerHP > 0 && !gameOver) {
-    chooseNewWords();
+        chooseNewWords();
     }
 }
 
@@ -273,8 +273,8 @@ var beginGame = function () {
         wronglyTypedDisplay.textContent = wronglyTypedPortion;
         toggleContainerVisibility(heroSelectScreen);
         toggleContainerVisibility(gameplayMainContainer);
-        beginNewStage();
         updateXPBar();
+        beginNewStage();
     }
 }
 
@@ -355,6 +355,7 @@ var setActiveEnemy = function (enemyInput) {
 
 
 var beginNewStage = function () {
+    mainInputBox.setAttribute('disabled', true);
     activeGameStage = gameStagesArray[activeGameStageIndex];
     activeMonsterArray = activeGameStage.monsterArray;
     gameplayMainContainer.classList.add(activeGameStage.backgroundImageClass);
@@ -363,9 +364,20 @@ var beginNewStage = function () {
     playerHP = playerMaxHP;
     selectNextEnemy();
     stopPhraseTimer();
-    chooseNewWords();
     updateScore();
-    mainInputBox.focus();
+    activeWord = ""
+    correctlyTypedPortion = "";
+    wronglyTypedPortion = "";
+    remainingToTypePortion = "";
+    popUpTextContent = "Welcome to " + activeGameStage.levelName;
+    textPopUp();
+    updateWordDisplay();
+    var startStageTimer = setTimeout(function () {
+        chooseNewWords();
+        mainInputBox.removeAttribute('disabled');
+        mainInputBox.focus();
+    }, 3000)
+
 }
 
 
