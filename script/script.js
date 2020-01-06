@@ -175,6 +175,10 @@ var clearWords = function () {
 // If an incorrect letter is typed. Only applies a penalty for the first mistake.
 // Subequent consecutive mistakes don't incur an extra penalty.
 var wrongLetterTyped = function () {
+    if (gameOver) {
+        stopPhraseTimer();
+        return;
+    }
     if (!mistakeMade) {
         // TODO: Freeze the game input
         // Have the enemy swipe the player.
@@ -222,7 +226,9 @@ var ranOutOfTime = function () {
     wrongLetterTyped();
     console.log('Ran out of time, making new phrase');
     wronglyTypedPortion = "";
+    if (playerHP > 0 && !gameOver) {
     chooseNewWords();
+    }
 }
 
 
@@ -271,9 +277,11 @@ var beginGame = function () {
 var checkIfGameWon = function () {
     if (!gameStagesArray[activeGameStageIndex]) {
         alert('You win! Game over!');
+        stopPhraseTimer();
         return true;
     }
 }
+
 
 // Update the scores.
 var updateScore = function () {
@@ -296,6 +304,7 @@ var updateEnemyHP = function () {
     var healthPercentage = Math.floor((enemyHP / enemyMaxHP) * 100);
     enemyHealthBar.style.width = healthPercentage + "%";
 }
+
 
 var updateEnemyDetails = function () {
     enemyNameText.textContent = activeEnemyName;
