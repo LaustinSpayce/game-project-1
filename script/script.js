@@ -262,6 +262,7 @@ var beginGame = function () {
         playerDamageText.textContent = "";
         enemyDamageText.textContent = "";
         score = 0;
+        gameOver = false;
         console.log('game begin');
         mainInputBox.removeAttribute('disabled');
         wronglyTypedPortion = "";
@@ -277,6 +278,7 @@ var beginGame = function () {
 var checkIfGameWon = function () {
     if (!gameStagesArray[activeGameStageIndex]) {
         alert('You win! Game over!');
+        gameOver = true;
         stopPhraseTimer();
         return true;
     }

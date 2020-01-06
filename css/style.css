@@ -78,3 +78,8 @@ And google chrome supports pixelated but not crisp-edges. */
 .hero-selected {
 	background-color: goldenrod;
 }
+
+#wordDisplay {
+	display: inline-block;
+	white-space: pre;
+}
