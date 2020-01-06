@@ -83,3 +83,24 @@ And google chrome supports pixelated but not crisp-edges. */
 	display: inline-block;
 	white-space: pre;
 }
+
+.popup-background {
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    justify-content: center;
+    align-items: center;
+    /* backdrop-filter: blur(5px); */
+    backdrop-filter: blur(10px);
+}
+
+.popup-text {
+	font-family: Bangers;
+	font-size: 4em;
+	color: goldenrod;
+	text-shadow: 2px 2px black;
+}

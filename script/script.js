@@ -40,6 +40,9 @@ var chooseClassArray = document.querySelectorAll('.choose-your-hero');
 var heroSelectScreen = document.querySelector('#heroSelectScreen');
 var playerNameInput = document.querySelector('#playerNameInput');
 var beginGameButton = document.querySelector('#beginGame');
+var textOverlayButton = document.querySelector('#textOverlayButton');
+var alertBackground = document.querySelector('#alertBackground');
+var alertText = document.querySelector('#alertText');
 
 // Global variables
 var playerName = "playerName";
@@ -60,6 +63,7 @@ var wizardImage = 'img/playerCharacter/witch-idle-00.png';
 // time to type the phrase in ms.
 var timeToTypePhrase = 5000;
 var phraseTimer;
+var popUpTextContent = "Popup Text";
 
 var playerLevel = 1;
 var playerXPToNextLevel = playerLevel * 10;
@@ -284,6 +288,29 @@ var checkIfGameWon = function () {
     }
 }
 
+
+var textPopUp = function () {
+    alertText.textContent = popUpTextContent;
+    alertText.classList.add('animated', 'bounceIn');
+    alertBackground.classList.add('animated', 'fadeIn');
+    alertBackground.classList.remove('d-none');
+    var alertDisappear = setTimeout(textPopUpVanish, 2000);
+}
+
+var textPopUpVanish = function () {
+    alertBackground.classList.remove('animated', 'fadeIn');
+    alertBackground.classList.add('animated', 'fadeOut');
+    alertText.classList.remove('animated', 'bounce');
+    alertText.classList.add('animated', 'bounceOut');
+    alertBackground.addEventListener('animationend', textPopUpReset);
+}
+
+var textPopUpReset = function () {
+    alertBackground.classList.remove('fadeOut');
+    alertText.classList.remove('bounceOut');
+    alertBackground.classList.add('d-none');
+    alertBackground.removeEventListener('animationend', textPopUpReset);
+}
 
 // Update the scores.
 var updateScore = function () {
@@ -519,7 +546,7 @@ chooseWarrior.addEventListener('click', heroSelection);
 chooseWizard.addEventListener('click', heroSelection);
 playerNameInput.addEventListener('keyup', checkIfCanStartGame);
 playerNameInput.addEventListener('change', hitEnterToBeginGame);
-
+textOverlayButton.addEventListener('click', textPopUp);
 
 // Assign names and levels to player:
 playerNameText.textContent = playerName;
