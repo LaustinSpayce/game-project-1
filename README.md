@@ -24,6 +24,7 @@ If you make consecutive mistakes without a correct character being typed in, you
     * Creepy Caves
 * Some light RPG-style levelling up and damage progression.
 * Special boss attacks/features for the three bosses.
+* Simple animations
 
 ## Features to implement
 * Each mistake locks the player as the monster "attacks".
@@ -34,7 +35,6 @@ If you make consecutive mistakes without a correct character being typed in, you
     * Unfunny meme
     * Pepe the frog
     * Inconsistent bugs
-* Add simple animations.
 * Add sound effects and maybe music.
 
 ## Game Assets

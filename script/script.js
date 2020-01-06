@@ -132,7 +132,7 @@ var checkWordMatched = function (event) {
 
 
 var animateCSS = function (element, animationName, callback) {
-    const node = element;
+    var node = element;
     node.classList.add('animated', animationName);
 
     function handleAnimationEnd() {
