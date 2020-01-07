@@ -84,10 +84,10 @@ var wronglyTypedPortion = "";
 var remainingToTypePortion = "";
 
 // Enemy details
-var activeEnemyName = "Terry";
-var activeEnemyLevel = 5;
-var enemyHP = 5;
-var enemyMaxHP = 5;
+var activeEnemyName = "";
+var activeEnemyLevel = 0;
+var enemyHP = 0;
+var enemyMaxHP = 0;
 var enemyDamage = 1;
 var bossFight = false;
 var enemyXP = 0;
@@ -317,7 +317,7 @@ var beginGame = function () {
 
 var checkIfGameWon = function () {
     if (!gameStagesArray[activeGameStageIndex]) {
-        popUpTextContent = "Congraulations!\nYou win the game!";
+        popUpTextContent = "Congratulations!\nYou win the game!";
         textPopUp();
         gameOver = true;
         stopPhraseTimer();
@@ -341,14 +341,16 @@ var textPopUp = function () {
     var alertDisappear = setTimeout(textPopUpVanish, 2000);
 }
 
+
 var textPopUpVanish = function () {
     alertBackground.classList.remove('animated', 'fadeIn');
     alertBackground.classList.add('animated', 'fadeOut');
     alertText.classList.remove('animated', 'bounce');
     alertText.classList.add('animated', 'bounceOut');
     alertBackground.addEventListener('animationend', textPopUpReset);
-    selectNextEnemy();
+    selectNextEnemy(); // We only use this text pop up to select a new enemy.
 }
+
 
 var textPopUpReset = function () {
     alertBackground.classList.remove('fadeOut');
@@ -356,6 +358,7 @@ var textPopUpReset = function () {
     alertBackground.classList.add('d-none');
     alertBackground.removeEventListener('animationend', textPopUpReset);
 }
+
 
 // Update the scores.
 var updateScore = function () {
@@ -402,6 +405,9 @@ var setActiveEnemy = function (enemyInput) {
 
 var beginNewStage = function () {
     mainInputBox.setAttribute('disabled', true);
+    enemyImage.src = "";
+    activeEnemyName = "";
+    updateEnemyDetails();
     activeGameStage = gameStagesArray[activeGameStageIndex];
     activeMonsterArray = activeGameStage.monsterArray;
     gameplayMainContainer.classList.add(activeGameStage.backgroundImageClass);
