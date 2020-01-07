@@ -41,16 +41,15 @@ If you make consecutive mistakes without a correct character being typed in, you
     * or just put arrow left or right of it?
 * easy mode too difficult - have difficulty ramp up over time
     * set all modes to have the same, reasonably long, timer. Slow typers can play easy mode and have ample time.
-
-## Bugs to fix
+* I found out what is going on with the enter key not working
+    * if you type your name, hit enter and it doesn't work, then select difficulty, if you click back into the name box and hit enter it won't do anything
+    * So I need to redo it that it’ll listen for the enter key on the text box instead of listening for a “changed” text box.
 * "and it does weird things when switching level, like letting you type briefly and the timer still going down"
     * the next level starts and you can type and the timer is doing it's thing, then it putting the heading up over it and resets.
 * cannot return to hero select after game over.
 
+## Bugs to fix
 * preload images
-* I found out what is going on with the enter key not working
-    * if you type your name, hit enter and it doesn't work, then select difficulty, if you click back into the name box and hit enter it won't do anything
-    * So I need to redo it that it’ll listen for the enter key on the text box instead of listening for a “changed” text box.
 
 
 ## Game Assets

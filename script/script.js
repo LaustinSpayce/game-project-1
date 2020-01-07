@@ -616,7 +616,11 @@ chooseAdventurer.addEventListener('click', heroSelection);
 chooseWarrior.addEventListener('click', heroSelection);
 chooseWizard.addEventListener('click', heroSelection);
 playerNameInput.addEventListener('keyup', checkIfCanStartGame);
-playerNameInput.addEventListener('change', hitEnterToBeginGame);
+playerNameInput.addEventListener('keydown', function (keyPressed) {
+    if (keyPressed.keyCode === 13) { // Check if the key pressed is enter.
+        hitEnterToBeginGame();
+    }
+})
 textOverlayButton.addEventListener('click', textPopUp);
 
 // Assign names and levels to player:
