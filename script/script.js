@@ -122,7 +122,6 @@ var checkWordMatched = function (event) {
         bossSpecialUsed = false; // Reset the boss special attack when the word is matched.
         damageEnemy();
         updateScore();
-        chooseNewWords();
     }
 
     if (bossFight) {
@@ -176,6 +175,8 @@ var chooseNewWords = function () {
     correctlyTypedPortion = "";
     remainingToTypePortion = activeWord;
     specialWordDisplay.textContent = "";
+    mainInputBox.removeAttribute('disabled');
+    mainInputBox.focus();
     updateHP();
     updateWordDisplay();
     updateEnemyHP();
@@ -303,6 +304,7 @@ var beginGame = function () {
         gameOver = false;
         console.log('game begin');
         mainInputBox.removeAttribute('disabled');
+        activeGameStageIndex = 0;
         wronglyTypedPortion = "";
         wronglyTypedDisplay.textContent = wronglyTypedPortion;
         toggleContainerVisibility(heroSelectScreen);
@@ -315,10 +317,18 @@ var beginGame = function () {
 
 var checkIfGameWon = function () {
     if (!gameStagesArray[activeGameStageIndex]) {
-        alert('You win! Game over!');
+        popUpTextContent = "Congraulations!\nYou win the game!";
+        textPopUp();
         gameOver = true;
         stopPhraseTimer();
+        mainInputBox.setAttribute('disabled', true);
+
+        var backToBeginning = setTimeout(function () {
+            toggleContainerVisibility(heroSelectScreen);
+            toggleContainerVisibility(gameplayMainContainer);
+        }, 1500);
         return true;
+
     }
 }
 
@@ -337,6 +347,7 @@ var textPopUpVanish = function () {
     alertText.classList.remove('animated', 'bounce');
     alertText.classList.add('animated', 'bounceOut');
     alertBackground.addEventListener('animationend', textPopUpReset);
+    selectNextEnemy();
 }
 
 var textPopUpReset = function () {
@@ -376,7 +387,7 @@ var updateEnemyDetails = function () {
 
 
 var setActiveEnemy = function (enemyInput) {
-    animateCSS(enemyImage, "bounceInRight");
+    animateCSS(enemyImage, "bounceInRight", chooseNewWords);
     activeEnemyName = enemyInput.name;
     activeEnemyLevel = enemyInput.level;
     enemyMaxHP = enemyInput.startHP;
@@ -397,7 +408,6 @@ var beginNewStage = function () {
     randomiseArrayOrder(activeMonsterArray);
     enemiesDefeated = 0;
     playerHP = playerMaxHP;
-    selectNextEnemy();
     stopPhraseTimer();
     updateScore();
     activeWord = ""
@@ -406,6 +416,7 @@ var beginNewStage = function () {
     remainingToTypePortion = "";
     popUpTextContent = "Welcome to " + activeGameStage.levelName;
     textPopUp();
+    clearWords();
     updateWordDisplay();
     var startStageTimer = setTimeout(function () {
         chooseNewWords();
@@ -449,7 +460,6 @@ var damageEnemy = function () {
     enemyHP -= damageDealt;
     enemyHP = (enemyHP < 0) ? 0 : enemyHP; // if HP is less than 0 set it to 0.
     animateCSS(playerImage, 'shake')
-    playerImage.classList.add('animated', 'shake');
     damageTextAppear(damageDealt, enemyDamageText);
     if (enemyHP <= 0) {
         // console.log(activeEnemyName + ' slain!');
@@ -458,9 +468,15 @@ var damageEnemy = function () {
         // mainInputBox.setAttribute('disabled', true);
         enemiesDefeated++;
         earnExperiencePoints(enemyXP);
+        clearWords();
+        updateWordDisplay();
+        mainInputBox.setAttribute('disabled', true);
         animateCSS(enemyImage, 'fadeOutRight', selectNextEnemy);
+        updateEnemyHP();
+        return;
     }
     updateEnemyHP();
+    chooseNewWords();
 }
 
 

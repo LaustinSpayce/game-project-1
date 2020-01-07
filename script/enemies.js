@@ -162,6 +162,11 @@ caveBoss.bossSpecialAttack = function () {
             activeWord += " " + wordDictionary[newWordIndex];
             activeWord = activeWord.trim();
             updateWordDisplay();
+            wordDisplay.classList.add('animated', 'bounce', 'bg-info');
+            // console.log('bounce!');
+            var wordDisplayReset = setTimeout(function () {
+                wordDisplay.classList.remove('animated', 'bounce', 'bg-info');
+            }, 1000);
             bossSpecialUsed = true;
         }
         return;
