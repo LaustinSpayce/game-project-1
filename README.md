@@ -28,9 +28,8 @@ If you make consecutive mistakes without a correct character being typed in, you
 * A randomised or semi-random group of enemies to attack (just name and maybe HP level changes:)
 
 ## Features to implement
-* Each mistake locks the player as the monster "attacks".
-* Add sound effects and maybe music.
-* make it more obvious that it's a typing game
+* Add sound effects and maybe music. (Not adding SFX and Music for now).
+* make it more obvious that it's a typing game.
 
 ## Bugs fixed on 7th Jan
 * prompt user if hero or name needs filling in
