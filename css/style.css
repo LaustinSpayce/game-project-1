@@ -31,10 +31,10 @@ And google chrome supports pixelated but not crisp-edges. */
 
 .damage-text {
 	position: absolute;
-    top: 0;
-    line-height: 4;
-    width: 100%;
-    height: 100%;
+	top: 0;
+	line-height: 4;
+	width: 100%;
+	height: 100%;
 	text-shadow: black 2px 2px;
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
@@ -42,9 +42,12 @@ And google chrome supports pixelated but not crisp-edges. */
 }
 
 .text-to-type-display {
-	-webkit-user-select: none; /* Chrome/Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+ */
+	-webkit-user-select: none;
+	/* Chrome/Safari */
+	-moz-user-select: none;
+	/* Firefox */
+	-ms-user-select: none;
+	/* IE10+ */
 }
 
 .choose-your-hero {
@@ -85,17 +88,17 @@ And google chrome supports pixelated but not crisp-edges. */
 }
 
 .popup-background {
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    justify-content: center;
-    align-items: center;
-    /* backdrop-filter: blur(5px); */
-    backdrop-filter: blur(10px);
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	justify-content: center;
+	align-items: center;
+	/* backdrop-filter: blur(5px); */
+	backdrop-filter: blur(10px);
 }
 
 .popup-text {
