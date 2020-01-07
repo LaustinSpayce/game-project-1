@@ -11,6 +11,8 @@ var EnemyMonster = function (name, startHP = 10, level = 5, graphic, activeLevel
         console.log('Boss Special Attack Activated');
         return;
     }
+    this.imageObject = new Image();
+    this.imageObject.src = graphic;
 }
 
 var StageLevel = function (levelName, backgroundImageClass, monsterArray, stageBoss, enemiesBeforeBoss) {
