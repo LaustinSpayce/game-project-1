@@ -50,7 +50,7 @@ If you make consecutive mistakes without a correct character being typed in, you
 * preload images
 * I found out what is going on with the enter key not working
     * if you type your name, hit enter and it doesn't work, then select difficulty, if you click back into the name box and hit enter it won't do anything
-    * So o need to redo it that it’ll listen for the enter key on the text box instead of listening for a “changed” text box.
+    * So I need to redo it that it’ll listen for the enter key on the text box instead of listening for a “changed” text box.
 
 
 ## Game Assets
