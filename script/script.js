@@ -658,3 +658,5 @@ var cacheGameBackgrounds = function () {
     cachedBackground.src = "img/backgrounds/backgroundColorDesert.png";
     cachedBackground.src = "img/backgrounds/backgroundcave.png";
 }
+
+cacheGameBackgrounds();
