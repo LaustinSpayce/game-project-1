@@ -649,3 +649,12 @@ playerImage.src = adventurerImage;
 timeToTypePhrase = 10000; // 10 second timer.
 chooseAdventurer.classList.add('hero-selected');
 checkIfCanStartGame();
+
+// Preload game background
+
+var cacheGameBackgrounds = function () {
+    var cachedBackground = new Image();
+    cachedBackground.src = "img/backgrounds/backgroundColorGrass.png";
+    cachedBackground.src = "img/backgrounds/backgroundColorDesert.png";
+    cachedBackground.src = "img/backgrounds/backgroundcave.png";
+}
