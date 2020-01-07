@@ -153,11 +153,13 @@ var updateWordDisplay = function () {
     completeWordHint.textContent = activeWord;
 }
 
+
 var updateTimeBar = function () {
     timeElapsed += 20;
-    var timeWidthPercentage = ((timeToTypePhrase - timeElapsed) / timeToTypePhrase ) * 100;
+    var timeWidthPercentage = ((timeToTypePhrase - timeElapsed) / timeToTypePhrase) * 100;
     timeBar.style.width = timeWidthPercentage + "%";
 }
+
 
 // Choose new words according to the difficulty.
 var chooseNewWords = function () {
@@ -243,6 +245,7 @@ var stopPhraseTimer = function () {
     if (phraseTimer) {
         clearTimeout(phraseTimer);
         clearInterval(timeBarTimer);
+        timeElapsed = 0;
         phraseTimer = null;
     }
 }
@@ -255,7 +258,8 @@ var ranOutOfTime = function () {
     phraseTimer = null;
     mistakeMade = false;
     wrongLetterTyped();
-    console.log('Ran out of time, making new phrase');
+    clearInterval(timeBarTimer);
+    // console.log('Ran out of time, making new phrase');
     wronglyTypedPortion = "";
     if (playerHP > 0 && !gameOver) {
         chooseNewWords();
@@ -269,6 +273,7 @@ var checkGameOver = function () {
     if (playerHP <= 0) {
         stopPhraseTimer();
         console.log('game over')
+        animateCSS(playerImage, 'fadeOutLeft', clearPlayerImage);
         gameOver = true;
         mainInputBox.setAttribute('disabled', true);
         popUpTextContent = "Game Over!";
@@ -280,6 +285,10 @@ var checkGameOver = function () {
     }
 }
 
+
+var clearPlayerImage = function () {
+    playerImage.src = "";
+}
 
 var beginGame = function () {
     console.log('clicked');
