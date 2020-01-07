@@ -331,7 +331,7 @@ var checkIfGameWon = function () {
         gameOver = true;
         stopPhraseTimer();
         mainInputBox.setAttribute('disabled', true);
-
+        enemyImage.src = "";
         var backToBeginning = setTimeout(function () {
             toggleContainerVisibility(heroSelectScreen);
             toggleContainerVisibility(gameplayMainContainer);
@@ -588,7 +588,6 @@ var playerLevelUp = function () {
     updateHP();
     playerXPToNextLevel += (playerLevel * 10)
     updateXPBar();
-    // TODO: RESET HEALTH
     // TODO: Play animation + sound effect for levelling up.
 }
 
@@ -650,8 +649,8 @@ timeToTypePhrase = 10000; // 10 second timer.
 chooseAdventurer.classList.add('hero-selected');
 checkIfCanStartGame();
 
-// Preload game background
 
+// Preload game background
 var cacheGameBackgrounds = function () {
     var cachedBackground = new Image();
     cachedBackground.src = "img/backgrounds/backgroundColorGrass.png";
