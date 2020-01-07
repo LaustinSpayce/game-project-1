@@ -29,7 +29,6 @@ If you make consecutive mistakes without a correct character being typed in, you
 
 ## Features to implement
 * Add sound effects and maybe music. (Not adding SFX and Music for now).
-* make it more obvious that it's a typing game.
 
 ## Bugs fixed on 7th Jan
 * prompt user if hero or name needs filling in
@@ -46,9 +45,9 @@ If you make consecutive mistakes without a correct character being typed in, you
 * "and it does weird things when switching level, like letting you type briefly and the timer still going down"
     * the next level starts and you can type and the timer is doing it's thing, then it putting the heading up over it and resets.
 * cannot return to hero select after game over.
+* preload images
 
 ## Bugs to fix
-* preload images
 
 
 ## Game Assets
