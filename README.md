@@ -32,16 +32,21 @@ If you make consecutive mistakes without a correct character being typed in, you
 * Add sound effects and maybe music.
 * make it more obvious that it's a typing game
 
-## Bugs to fix
+## Bugs fixed on 7th Jan
 * prompt user if hero or name needs filling in
-* easy mode too difficult - have difficulty ramp up over time
-* "and it does weird things when switching level, like letting you type briefly and the timer still going down"
-    * the next level starts and you can type and the timer is doing it's thing, then it putting the heading up over it and resets.
-* cannot return to hero select after game over.
+    * Have a name and hero pre-selected so can just click right through.
 * have a default difficulty and name put in so can just enter the game immediately.
     * you could make up/down arrow switch difficulty from within the name box?
     * Yeah a default. I think having “Player1” as a default name too will help save the lazy people.
     * or just put arrow left or right of it?
+* easy mode too difficult - have difficulty ramp up over time
+    * set all modes to have the same, reasonably long, timer. Slow typers can play easy mode and have ample time.
+
+## Bugs to fix
+* "and it does weird things when switching level, like letting you type briefly and the timer still going down"
+    * the next level starts and you can type and the timer is doing it's thing, then it putting the heading up over it and resets.
+* cannot return to hero select after game over.
+
 * preload images
 * I found out what is going on with the enter key not working
     * if you type your name, hit enter and it doesn't work, then select difficulty, if you click back into the name box and hit enter it won't do anything

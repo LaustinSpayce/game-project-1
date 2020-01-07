@@ -485,13 +485,13 @@ var heroSelection = function () {
             wordsPerBox = 1;
             maxWordLength = 5;
             playerImage.src = adventurerImage;
-            timeToTypePhrase = 5000; // 10 second timer.
+            timeToTypePhrase = 10000; // 10 second timer.
             break;
         case 'chooseWarrior':
             wordsPerBox = 2;
             maxWordLength = 7;
             playerImage.src = warriorImage;
-            timeToTypePhrase = 7500; // 15 second timer.
+            timeToTypePhrase = 10000; // 15 second timer.
             break;
         case 'chooseWizard':
             wordsPerBox = 3;
@@ -606,4 +606,11 @@ enemyLevelText.textContent = "Level " + activeEnemyLevel;
 
 // Disable the input box if the game is not running.
 mainInputBox.setAttribute('disabled', true);
-beginGameButton.setAttribute('disabled', true);
+
+// Automatically select the Adventurer as default character.
+wordsPerBox = 1;
+maxWordLength = 5;
+playerImage.src = adventurerImage;
+timeToTypePhrase = 10000; // 10 second timer.
+chooseAdventurer.classList.add('hero-selected');
+checkIfCanStartGame();
