@@ -63,6 +63,8 @@
 
 2. What habits did I have during this unit that I can improve on?
     * Have more helpful function and variable names. Sometimes they are a bit long winded or inconsistent with other variable/function names. So it can get confusing.
+    * Functions -> verbNoun (getPassword, selectHero, hideTimer etc.)
+    * bool should read as a question (hasGameStarted, isLevelTwo etc.)
 
 3. How is the overall level of the course during this unit? (instruction, course materials, etc.)
     * Good I think?
