@@ -1,5 +1,5 @@
-# Typing Battle Game
-A WIP typing battle RPG game.
+# Keyboard Warriors
+Keyboard Warriors is a browser based typing game
 
 ## Description
 A typing game for General Assembley SEI 21, project 1.
