@@ -1,5 +1,5 @@
 # Keyboard Warriors
-Keyboard Warriors is a browser based typing game
+[Keyboard Warriors](https://laustinspayce.github.io/game-project-1/) is a browser based typing game
 
 ## Description
 A typing game for General Assembley SEI 21, project 1.
